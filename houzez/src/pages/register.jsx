@@ -7,10 +7,11 @@ export default function Register() {
   // hook for showing and hiding password set to false as we dont want to see password as a default
   const [viewPassword, setViewPassword] = useState(false);
   const [formData, setFormData] = useState({
+    name: "",
     email: "",
     password: "",
   });
-  const { email, password } = formData;
+  const { name, email, password } = formData;
 
   function onchange(event) {
     setFormData((prevState) => ({
@@ -26,7 +27,7 @@ export default function Register() {
         <div class="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6">
           <div class="grow-0 shrink-1 md:shrink-0 basis-auto xl:w-6/12 lg:w-6/12 md:w-9/12 mb-12 md:mb-0">
             <img
-              src="https://images.unsplash.com/photo-1560184897-ae75f418493e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
+              src="https://images.unsplash.com/photo-1584738766473-61c083514bf4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
               class="w-full"
               alt="house"
               className="  rounded-2xl"
@@ -45,18 +46,19 @@ export default function Register() {
               <div class="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
                 <p class="text-center font-semibold mx-4 mb-0">Or</p>
               </div>
-
+              {/* username field  */}
               <div class="mb-6">
                 <input
                   type="text"
                   class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  id="email"
+                  id="name"
                   placeholder="Username"
-                  value={email}
-                  // whatever is typed in the email will be pushed as the value to the email var by onchange
+                  value={name}
+                  // whatever is typed in the name will be pushed as the value to the email var by onchange
                   onChange={onchange}
                 />
               </div>
+              {/* email field  */}
               <div class="mb-6">
                 <input
                   type="text"
@@ -68,7 +70,7 @@ export default function Register() {
                   onChange={onchange}
                 />
               </div>
-
+              {/* password field  */}
               <div className="mb-6 mt-4 relative">
                 <input
                   type={viewPassword ? "text" : "password"}
