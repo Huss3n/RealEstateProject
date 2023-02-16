@@ -51,10 +51,10 @@ export default function Header() {
             Offers
           </li>
           <li
-            className={`cursor-pointer py-3 text-sm font-semibold text-gray-500 border-b-2 ${getPath("/signIn") ? "border-b-red-500 text-black" : "border-b-transparent"}`}
-            onClick={() => navigate("/signUp")}
+            className={`cursor-pointer py-3 text-sm font-semibold text-gray-500 border-b-2 ${getPath("/login") ? "border-b-red-500 text-black" : "border-b-transparent"}`}
+            onClick={() => navigate("/login")}
           >
-            Sign In
+            Log In
           </li>
         </ul>
       </header>
