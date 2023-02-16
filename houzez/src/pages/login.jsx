@@ -1,6 +1,11 @@
 import React, { useState } from "react";
+import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import OAuth from "../components/OAuth";
+// import OAuth from "./OAuth";
 
 export default function Login() {
+  // hook for showing and hiding password set to false as we dont want to see password as a default
+  const [viewPassword, setViewPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -30,7 +35,11 @@ export default function Login() {
           <div class="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
             <form>
               <div class="flex flex-row items-center justify-center lg:justify-start">
-                <p class="text-lg mb-0 mr-4">Sign in with</p>
+                {/* <p class="text-lg mb-0 mr-4">Sign in with</p> */}
+                <OAuth />
+                {/* <a href="OAuth" class="pl-2 text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out">
+                  OAuth
+                </a> */}
               </div>
 
               <div class="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
@@ -49,27 +58,35 @@ export default function Login() {
                 />
               </div>
 
-              <div class="mb-6">
+              <div className="mb-6 mt-4 relative">
                 <input
-                  type="password"
+                  type={viewPassword ? "text" : "password"}
                   class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   id="password"
                   placeholder="Password"
+                  value={password}
+                  onChange={onchange}
                 />
+
+                {viewPassword ? (
+                  <AiFillEyeInvisible className="absolute top-1/2 transform -translate-y-1/2 right-3 cursor-pointer" onClick={() => setViewPassword((prevState) => !prevState)} />
+                ) : (
+                  <AiFillEye className="absolute top-1/2 transform -translate-y-1/2 right-3 cursor-pointer" onClick={() => setViewPassword((prevState) => !prevState)} />
+                )}
               </div>
 
-              <div class="flex justify-between items-center mb-6">
+              <div class="flex justify-between items-center mb-6 mr-4">
                 <div class="form-group form-check">
                   <input
                     type="checkbox"
-                    class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                    class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-3 cursor-pointer"
                     id="exampleCheck2"
                   />
                   <label class="form-check-label inline-block text-gray-800" for="exampleCheck2">
                     Remember me
                   </label>
                 </div>
-                <a href="#!" class="text-gray-800">
+                <a href="forgotPassword" class="text-blue-600">
                   Forgot password?
                 </a>
               </div>
@@ -83,7 +100,7 @@ export default function Login() {
                 </button>
                 <p class="text-sm font-semibold mt-2 pt-1 mb-0">
                   Don't have an account?
-                  <a href="#!" class="pl-2 text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out">
+                  <a href="register" class="pl-2 text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out">
                     Register
                   </a>
                 </p>
