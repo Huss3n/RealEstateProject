@@ -13,7 +13,7 @@ export default function OAuth() {
       w-full
       px-7
       py-3
-      bg-red-500
+      bg-red-400
       text-white
       font-medium
       text-sm

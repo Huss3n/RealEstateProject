@@ -23,7 +23,7 @@ export default function ForgotPassword() {
             />
           </div>
           <div class="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0 pt-0 py-8">
-            <h1 className="text-xl text-blue-600 mb-2 mt-0">Forgot password ?</h1>
+            <h1 className="text-xl text-red-500 mb-2 mt-0 pb-1">Forgot password ?</h1>
             <form>
               <div class="flex flex-row items-center justify-center lg:justify-start">
                 {/* <p class="text-lg mb-0 mr-4">Sign in with</p> */}

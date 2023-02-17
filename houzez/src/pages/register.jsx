@@ -21,6 +21,33 @@ export default function Register() {
     }));
   }
 
+  // the submit function
+  function onSubmit(action) {
+    action.preventDefault();
+  }
+  // function SignUpForm() {
+  //   const [name, setName] = useState("");
+  //   const [email, setEmail] = useState("");
+  //   const [password, setPassword] = useState("");
+  //   const [viewPassword, setViewPassword] = useState(false);
+
+  //   const handleSubmit = (event) => {
+  //     event.preventDefault();
+  //     // Handle form submission logic here
+  //     console.log("Submitting form:", name, email, password);
+  //   };
+
+  //   const handleChange = (event) => {
+  //     const { id, value } = event.target;
+  //     if (id === "name") {
+  //       setName(value);
+  //     } else if (id === "email") {
+  //       setEmail(value);
+  //     } else if (id === "password") {
+  //       setPassword(value);
+  //     }
+  //   };
+
   return (
     <section class="h-screen">
       <div class="px-6 h-full text-gray-800">
@@ -34,7 +61,9 @@ export default function Register() {
             />
           </div>
           <div class="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
-            <form>
+            {/* we need to add an onsubmit to the form to push the data to the firebase auth and remember the caps in the function */}
+            <form onSubmit={onsubmit}>
+              <h1 className="text-xl text-red-500 mb-2 mt-0 pb-1">Sign up</h1>
               <div class="flex flex-row items-center justify-center lg:justify-start">
                 {/* <p class="text-lg mb-0 mr-4">Sign in with</p> */}
                 <OAuth />

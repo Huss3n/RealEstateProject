@@ -34,6 +34,7 @@ export default function Login() {
           </div>
           <div class="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
             <form>
+              <h1 className="text-xl text-red-500 mb-2 mt-0 pb-1">Login</h1>
               <div class="flex flex-row items-center justify-center lg:justify-start">
                 {/* <p class="text-lg mb-0 mr-4">Sign in with</p> */}
                 <OAuth />
