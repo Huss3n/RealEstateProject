@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import OAuth from "../components/OAuth";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 // import OAuth from "./OAuth";
 
 export default function Register() {
@@ -24,6 +25,16 @@ export default function Register() {
   // the submit function
   function onSubmit(action) {
     action.preventDefault();
+    // initializing the auth
+    try {
+      const auth = getAuth();
+      // get user data from the form data
+      const userData = createUserWithEmailAndPassword(auth, email, password);
+      const user = userData.user;
+      console.log(user);
+    } catch (error) {
+      console.log(error);
+    }
   }
   // function SignUpForm() {
   //   const [name, setName] = useState("");
@@ -49,22 +60,21 @@ export default function Register() {
   //   };
 
   return (
-    <section class="h-screen">
-      <div class="px-6 h-full text-gray-800">
-        <div class="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6">
-          <div class="grow-0 shrink-1 md:shrink-0 basis-auto xl:w-6/12 lg:w-6/12 md:w-9/12 mb-12 md:mb-0">
+    <section className="h-screen">
+      <div className="px-6 h-full text-gray-800">
+        <div className="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6">
+          <div className="grow-0 shrink-1 md:shrink-0 basis-auto xl:w-6/12 lg:w-6/12 md:w-9/12 mb-12 md:mb-0">
             <img
               src="https://images.unsplash.com/photo-1584738766473-61c083514bf4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-              class="w-full"
+              className="w-full rounded-2xl"
               alt="house"
-              className="  rounded-2xl"
             />
           </div>
-          <div class="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
+          <div className="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
             {/* we need to add an onsubmit to the form to push the data to the firebase auth and remember the caps in the function */}
             <form onSubmit={onsubmit}>
               <h1 className="text-xl text-red-500 mb-2 mt-0 pb-1">Sign up</h1>
-              <div class="flex flex-row items-center justify-center lg:justify-start">
+              <div className="flex flex-row items-center justify-center lg:justify-start">
                 {/* <p class="text-lg mb-0 mr-4">Sign in with</p> */}
                 <OAuth />
                 {/* <a href="OAuth" class="pl-2 text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out">
@@ -72,14 +82,14 @@ export default function Register() {
                 </a> */}
               </div>
 
-              <div class="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
-                <p class="text-center font-semibold mx-4 mb-0">Or</p>
+              <div className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
+                <p className="text-center font-semibold mx-4 mb-0">Or</p>
               </div>
               {/* username field  */}
-              <div class="mb-6">
+              <div className="mb-6">
                 <input
                   type="text"
-                  class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                  className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   id="name"
                   placeholder="Username"
                   value={name}
@@ -88,10 +98,10 @@ export default function Register() {
                 />
               </div>
               {/* email field  */}
-              <div class="mb-6">
+              <div className="mb-6">
                 <input
                   type="text"
-                  class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                  className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   id="email"
                   placeholder="Email address"
                   value={email}
@@ -103,7 +113,7 @@ export default function Register() {
               <div className="mb-6 mt-4 relative">
                 <input
                   type={viewPassword ? "text" : "password"}
-                  class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                  className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   id="password"
                   placeholder="Password"
                   value={password}
@@ -117,14 +127,14 @@ export default function Register() {
                 )}
               </div>
 
-              <div class="flex justify-between items-center mb-6 mr-4">
-                <div class="form-group form-check">
+              <div className="flex justify-between items-center mb-6 mr-4">
+                <div className="form-group form-check">
                   <input
                     type="checkbox"
-                    class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-3 cursor-pointer"
+                    className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-3 cursor-pointer"
                     id="exampleCheck2"
                   />
-                  <label class="form-check-label inline-block text-gray-800" for="exampleCheck2">
+                  <label className="form-check-label inline-block text-gray-800" htmlFor="exampleCheck2">
                     Remember me
                   </label>
                 </div>
@@ -133,16 +143,16 @@ export default function Register() {
                 </a> */}
               </div>
 
-              <div class="text-center lg:text-left">
+              <div className="text-center lg:text-left">
                 <button
                   type="button"
-                  class="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                  className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                 >
                   Register
                 </button>
-                <p class="text-sm font-semibold mt-2 pt-1 mb-0">
+                <p className="text-sm font-semibold mt-2 pt-1 mb-0">
                   Have an account?
-                  <a href="Login" class="pl-2 text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out">
+                  <a href="Login" className="pl-2 text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out">
                     Login
                   </a>
                 </p>
