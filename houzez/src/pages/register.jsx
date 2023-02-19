@@ -51,7 +51,6 @@ export default function Register() {
 
       // save data to firestore
       await setDoc(doc(db, "users", user.uid), { dbData });
-
       // navigate user to home page after successful data storage
       navigate("/");
     } catch (error) {

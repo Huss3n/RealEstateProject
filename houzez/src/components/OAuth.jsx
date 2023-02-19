@@ -1,12 +1,24 @@
 import React from "react";
 import { FcGoogle } from "react-icons/fc";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { toast } from "react-toastify";
+
 export default function OAuth() {
+  async function signInwithGoogle() {
+    try {
+      const auth = getAuth();
+      const provider = new GoogleAuthProvider();
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+    } catch (error) {
+      toast.error("Could not authorize Google sign in");
+    }
+  }
+
   return (
-    // <button className="flex items-center justify-center w-full bg-red-500 text-white px-7 py-3 uppercase text-sm font-medium hover:bg-red-600 active:red-900 shadow-md hover:shadow-lg active:shadow-lg transition duration-150 ease-out rounded">
-    //   <FcGoogle />
-    //   Continue with google
-    // </button>
     <button
+      type="button"
+      onClick={signInwithGoogle}
       className=" 
       flex
       justify-center
