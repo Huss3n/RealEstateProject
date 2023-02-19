@@ -16,7 +16,7 @@ export default function Register() {
     password: "",
   });
   const { username, email, password } = formData;
-
+  const navigate = useNavigate();
   function onchange(event) {
     setFormData((prevState) => ({
       // keep the preview state and just add a new one
@@ -48,8 +48,11 @@ export default function Register() {
       // get the time user is created
       dbData.timestamp = serverTimestamp();
 
-      // save
+      // save data to firestore
       await setDoc(doc(db, "users", user.uid), { dbData });
+
+      // navigate user to home page after successful data storage
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
