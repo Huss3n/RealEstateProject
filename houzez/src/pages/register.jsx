@@ -6,6 +6,7 @@ import { db } from "../firebase";
 // import { getFirestore } from "firebase/firestore";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 export default function Register() {
   // hook for showing and hiding password set to false as we dont want to see password as a default
@@ -54,7 +55,8 @@ export default function Register() {
       // navigate user to home page after successful data storage
       navigate("/");
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      toast.error("Something went wrong");
     }
   }
 
