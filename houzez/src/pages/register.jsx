@@ -1,18 +1,21 @@
 import React, { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import OAuth from "../components/OAuth";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { db } from "../firebase";
+// import { getFirestore } from "firebase/firestore";
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { useNavigate } from "react-router";
 
 export default function Register() {
   // hook for showing and hiding password set to false as we dont want to see password as a default
   const [viewPassword, setViewPassword] = useState(false);
   const [formData, setFormData] = useState({
-    name: "",
+    username: "",
     email: "",
     password: "",
   });
-  const { name, email, password } = formData;
+  const { username, email, password } = formData;
 
   function onchange(event) {
     setFormData((prevState) => ({
@@ -28,36 +31,29 @@ export default function Register() {
     // initializing the auth
     try {
       const auth = getAuth();
+      // const db = getFirestore();
+
       // get user data from the form data
       const userData = await createUserWithEmailAndPassword(auth, email, password);
       const user = userData.user;
-      console.log(user);
+      // setting the display name
+      updateProfile(auth.currentUser, {
+        displayName: username,
+      });
+
+      // prepare data needed for db
+      const dbData = { ...formData };
+      // remove password from the db data
+      delete dbData.password;
+      // get the time user is created
+      dbData.timestamp = serverTimestamp();
+
+      // save
+      await setDoc(doc(db, "users", user.uid), { dbData });
     } catch (error) {
       console.log(error);
     }
   }
-  // function SignUpForm() {
-  //   const [name, setName] = useState("");
-  //   const [email, setEmail] = useState("");
-  //   const [password, setPassword] = useState("");
-  //   const [viewPassword, setViewPassword] = useState(false);
-
-  //   const handleSubmit = (event) => {
-  //     event.preventDefault();
-  //     // Handle form submission logic here
-  //     console.log("Submitting form:", name, email, password);
-  //   };
-
-  //   const handleChange = (event) => {
-  //     const { id, value } = event.target;
-  //     if (id === "name") {
-  //       setName(value);
-  //     } else if (id === "email") {
-  //       setEmail(value);
-  //     } else if (id === "password") {
-  //       setPassword(value);
-  //     }
-  //   };
 
   return (
     <section className="h-screen">
@@ -65,7 +61,7 @@ export default function Register() {
         <div className="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6">
           <div className="grow-0 shrink-1 md:shrink-0 basis-auto xl:w-6/12 lg:w-6/12 md:w-9/12 mb-12 md:mb-0">
             <img
-              src="https://images.unsplash.com/photo-1584738766473-61c083514bf4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+              src="https://images.unsplash.com/photo-1584738766473-61c083514bf4?ixlib=rb-4.0.3& ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
               className="w-full rounded-2xl"
               alt="house"
             />
@@ -75,11 +71,7 @@ export default function Register() {
             <form onSubmit={onSubmit}>
               <h1 className="text-xl text-red-500 mb-2 mt-0 pb-1">Sign up</h1>
               <div className="flex flex-row items-center justify-center lg:justify-start">
-                {/* <p class="text-lg mb-0 mr-4">Sign in with</p> */}
                 <OAuth />
-                {/* <a href="OAuth" class="pl-2 text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out">
-                  OAuth
-                </a> */}
               </div>
 
               <div className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
@@ -90,9 +82,9 @@ export default function Register() {
                 <input
                   type="text"
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  id="name"
+                  id="username"
                   placeholder="Username"
-                  value={name}
+                  value={username}
                   // whatever is typed in the name will be pushed as the value to the email var by onchange
                   onChange={onchange}
                 />
@@ -164,68 +156,3 @@ export default function Register() {
     </section>
   );
 }
-
-// import { NavLink, useNavigate } from "react-router-dom";
-// import React, { useState } from "react";
-// import { createUserWithEmailAndPassword } from "firebase/auth";
-// import { auth } from "../firebase";
-
-// export default function register() {
-//   return (register = () => {
-//     const navigate = useNavigate();
-
-//     const [email, setEmail] = useState("");
-//     const [password, setPassword] = useState("");
-
-//     const onSubmit = async (e) => {
-//       e.preventDefault();
-
-//       await createUserWithEmailAndPassword(auth, email, password)
-//         .then((userCredential) => {
-//           // Signed in
-//           const user = userCredential.user;
-//           console.log(user);
-//           navigate("/login");
-//           // ...
-//         })
-//         .catch((error) => {
-//           const errorCode = error.code;
-//           const errorMessage = error.message;
-//           console.log(errorCode, errorMessage);
-//           // ..
-//         });
-//     };
-
-//     return (
-//       <main>
-//         <section>
-//           <div>
-//             <div>
-//               <h1> FocusApp </h1>
-//               <form>
-//                 <div>
-//                   <label htmlFor="email-address">Email address</label>
-//                   <input type="email" label="Email address" value={email} onChange={(e) => setEmail(e.target.value)} required placeholder="Email address" />
-//                 </div>
-
-//                 <div>
-//                   <label htmlFor="password">Password</label>
-//                   <input type="password" label="Create password" value={password} onChange={(e) => setPassword(e.target.value)} required placeholder="Password" />
-//                 </div>
-
-//                 <button type="submit" onClick={onSubmit}>
-//                   Sign up
-//                 </button>
-//               </form>
-
-//               <p>
-//                 Already have an account? <NavLink to="/login">Sign in</NavLink>
-//               </p>
-//             </div>
-//           </div>
-//         </section>
-//       </main>
-//     );
-//   });
-// }
-// export default register
