@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import OAuth from "../components/OAuth";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-// import OAuth from "./OAuth";
+import { db } from "../firebase";
 
 export default function Register() {
   // hook for showing and hiding password set to false as we dont want to see password as a default
@@ -23,13 +23,13 @@ export default function Register() {
   }
 
   // the submit function
-  function onSubmit(action) {
+  async function onSubmit(action) {
     action.preventDefault();
     // initializing the auth
     try {
       const auth = getAuth();
       // get user data from the form data
-      const userData = createUserWithEmailAndPassword(auth, email, password);
+      const userData = await createUserWithEmailAndPassword(auth, email, password);
       const user = userData.user;
       console.log(user);
     } catch (error) {
@@ -72,7 +72,7 @@ export default function Register() {
           </div>
           <div className="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
             {/* we need to add an onsubmit to the form to push the data to the firebase auth and remember the caps in the function */}
-            <form onSubmit={onsubmit}>
+            <form onSubmit={onSubmit}>
               <h1 className="text-xl text-red-500 mb-2 mt-0 pb-1">Sign up</h1>
               <div className="flex flex-row items-center justify-center lg:justify-start">
                 {/* <p class="text-lg mb-0 mr-4">Sign in with</p> */}
@@ -145,7 +145,7 @@ export default function Register() {
 
               <div className="text-center lg:text-left">
                 <button
-                  type="button"
+                  type="submit"
                   className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                 >
                   Register
@@ -164,3 +164,68 @@ export default function Register() {
     </section>
   );
 }
+
+// import { NavLink, useNavigate } from "react-router-dom";
+// import React, { useState } from "react";
+// import { createUserWithEmailAndPassword } from "firebase/auth";
+// import { auth } from "../firebase";
+
+// export default function register() {
+//   return (register = () => {
+//     const navigate = useNavigate();
+
+//     const [email, setEmail] = useState("");
+//     const [password, setPassword] = useState("");
+
+//     const onSubmit = async (e) => {
+//       e.preventDefault();
+
+//       await createUserWithEmailAndPassword(auth, email, password)
+//         .then((userCredential) => {
+//           // Signed in
+//           const user = userCredential.user;
+//           console.log(user);
+//           navigate("/login");
+//           // ...
+//         })
+//         .catch((error) => {
+//           const errorCode = error.code;
+//           const errorMessage = error.message;
+//           console.log(errorCode, errorMessage);
+//           // ..
+//         });
+//     };
+
+//     return (
+//       <main>
+//         <section>
+//           <div>
+//             <div>
+//               <h1> FocusApp </h1>
+//               <form>
+//                 <div>
+//                   <label htmlFor="email-address">Email address</label>
+//                   <input type="email" label="Email address" value={email} onChange={(e) => setEmail(e.target.value)} required placeholder="Email address" />
+//                 </div>
+
+//                 <div>
+//                   <label htmlFor="password">Password</label>
+//                   <input type="password" label="Create password" value={password} onChange={(e) => setPassword(e.target.value)} required placeholder="Password" />
+//                 </div>
+
+//                 <button type="submit" onClick={onSubmit}>
+//                   Sign up
+//                 </button>
+//               </form>
+
+//               <p>
+//                 Already have an account? <NavLink to="/login">Sign in</NavLink>
+//               </p>
+//             </div>
+//           </div>
+//         </section>
+//       </main>
+//     );
+//   });
+// }
+// export default register
