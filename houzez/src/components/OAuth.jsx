@@ -2,14 +2,33 @@ import React from "react";
 import { FcGoogle } from "react-icons/fc";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { toast } from "react-toastify";
+import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
+import { db } from "../firebase";
+import { useNavigate } from "react-router";
 
 export default function OAuth() {
+  const navigate = useNavigate();
   async function signInwithGoogle() {
     try {
       const auth = getAuth();
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
+
+      // check if user exists in the db
+      const userRef = doc(db, "users", user.uid);
+
+      // geting the user if available it will be added to user user snap
+      const docSnap = await getDoc(userRef);
+      if (!docSnap.exists()) {
+        await setDoc(userRef, {
+          name: user.displayName,
+          email: user.email,
+          timestamp: serverTimestamp(),
+        });
+      }
+      toast.success("Sign up successful");
+      navigate("/");
     } catch (error) {
       toast.error("Could not authorize Google sign in");
     }
