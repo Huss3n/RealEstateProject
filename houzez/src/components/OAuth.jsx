@@ -27,7 +27,7 @@ export default function OAuth() {
           timestamp: serverTimestamp(),
         });
       }
-      toast.success("Sign up successful");
+      // toast.success((= "login" ? "Sign up successful" : "Login successful"));
       navigate("/");
     } catch (error) {
       toast.error("Could not authorize Google sign in");
