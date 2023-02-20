@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import OAuth from "../components/OAuth";
 // import OAuth from "./OAuth";
-
+import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
 export default function Login() {
   // hook for showing and hiding password set to false as we dont want to see password as a default
+  const navigate = useNavigate();
   const [viewPassword, setViewPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -20,6 +23,22 @@ export default function Login() {
     }));
   }
 
+  async function login(e) {
+    e.preventDefault();
+    try {
+      const auth = getAuth();
+      // sign in user
+      const usercredentials = await signInWithEmailAndPassword(auth, email, password);
+      // navigate user to home page if sign in was successful
+      if (usercredentials.user) {
+        navigate("/");
+      }
+    } catch (error) {
+      toast.error("Wrong email or password");
+      console.log(error);
+    }
+  }
+
   return (
     <section className="h-screen">
       <div className="px-6 h-full text-gray-800">
@@ -32,7 +51,7 @@ export default function Login() {
             />
           </div>
           <div className="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
-            <form>
+            <form onSubmit={login}>
               <h1 className="text-xl text-red-500 mb-2 mt-0 pb-1">Login</h1>
               <div className="flex flex-row items-center justify-center lg:justify-start">
                 {/* <p class="text-lg mb-0 mr-4">Sign in with</p> */}
@@ -93,7 +112,7 @@ export default function Login() {
 
               <div className="text-center lg:text-left">
                 <button
-                  type="button"
+                  type="submit"
                   className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                 >
                   Login
