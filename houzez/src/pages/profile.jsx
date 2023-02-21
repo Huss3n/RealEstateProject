@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { getAuth } from "firebase/auth";
+import { useNavigate } from "react-router";
 
 export default function Profile() {
   const auth = getAuth();
@@ -10,6 +11,12 @@ export default function Profile() {
 
   const { username, email } = userData;
 
+  const navigate = useNavigate();
+  // signout function
+  function signout() {
+    auth.signOut();
+    navigate("/");
+  }
   return (
     <>
       <section className="flex justify-content flex-col items-center max-width-4xl mx-auto">
@@ -29,7 +36,9 @@ export default function Profile() {
             Edit profile:
             <span className="cursor-pointer text-decoration-line: underline text-red-400 ml-3 hover:text-xl transition ease-in-out duration-150">🖍️</span>
           </p>
-          <p className="pl-28 text-blue-400 cursor-pointer hover:text-red-400 transition ease-out duration-200">Sign out</p>
+          <p className="pl-28 text-blue-400 cursor-pointer hover:text-red-400 transition ease-out duration-200" onClick={signout}>
+            Sign out
+          </p>
         </div>
       </section>
     </>
