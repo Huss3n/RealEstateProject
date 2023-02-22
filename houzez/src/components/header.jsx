@@ -31,7 +31,7 @@ export default function Header() {
   }, [auth]);
 
   return (
-    <div className="bg-white border-b shadow-sm sticky-top-0 z-50">
+    <div className="bg-white border-b shadow-sm sticky-top-0 z-40">
       <header className="flex just justify-between items-center px-2 max-w-7xl mx-auto">
         <div className="flex items-center">
           <img src={require("./logo/logo.png")} alt="logo" className="h-8 cursor-pointer flex-shrink-0" onClick={() => navigate("/")} />
