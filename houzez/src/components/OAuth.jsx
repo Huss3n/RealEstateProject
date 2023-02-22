@@ -50,7 +50,7 @@ export default function OAuth() {
       text-sm
       leading-snug
       uppercase
-      rounded
+      rounded-2xl
       shadow-md
       hover:bg-red-600
       hover:shadow-lg
