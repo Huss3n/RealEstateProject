@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-// import {getAUth} fro
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 export default function Header() {
   const location = useLocation();
@@ -14,10 +14,21 @@ export default function Header() {
   // }
   // get the state of the user and set it to sign in for a new user, if user is signed in we need to change it to profile
   const [viewstate, setViewState] = useState("Sign in");
-  // const auth = getAuth;
+  const auth = getAuth();
   function getPath(route) {
     return location.pathname === route;
   }
+
+  // changes the header to profile when user is authenticated and to login when not
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setViewState("Profile");
+      } else {
+        setViewState("Login");
+      }
+    });
+  }, [auth]);
 
   return (
     <div className="bg-white border-b shadow-sm sticky-top-0 z-50">
