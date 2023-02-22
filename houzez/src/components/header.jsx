@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+// import {getAUth} fro
 
 export default function Header() {
   const location = useLocation();
@@ -11,6 +12,9 @@ export default function Header() {
   //     return true;
   //   }
   // }
+  // get the state of the user and set it to sign in for a new user, if user is signed in we need to change it to profile
+  const [viewstate, setViewState] = useState("Sign in");
+  // const auth = getAuth;
   function getPath(route) {
     return location.pathname === route;
   }
@@ -24,18 +28,6 @@ export default function Header() {
             HouzeHive
           </span>
         </div>
-
-        {/* <div>
-          <ul className="flex space-x-10 my-5">
-            <li className={`cursor-pointer py-3 text-sm font-semibold text-gray-500 border-b-2 border-b-transparent ${getPath("/") && "text-black border-b-red-500"}`}>Home</li>
-            <li className={`cursor-pointer py-3 text-sm font-semibold text-gray-500 border-b-2 border-b-transparent ${getPath("/offers") && "text-black border-b-red-500"}`}>
-              Offers
-            </li>
-            <li className={`cursor-pointer py-3 text-sm font-semibold text-gray-500 border-b-2 border-b-transparent ${getPath("/signIn") && "text-black border-b-red-500"}`}>
-              Sign In
-            </li>
-          </ul>
-        </div> */}
 
         <ul className="flex space-x-10 my-5">
           <li
@@ -51,10 +43,12 @@ export default function Header() {
             Offers
           </li>
           <li
-            className={`cursor-pointer py-3 text-sm font-semibold text-gray-500 border-b-2 ${getPath("/Login") ? "border-b-red-500 text-black" : "border-b-transparent"}`}
-            onClick={() => navigate("/Login")}
+            className={`cursor-pointer py-3 text-sm font-semibold text-gray-500 border-b-2 ${
+              getPath("/Login") || getPath("/profile") ? "border-b-red-500 text-black" : "border-b-transparent"
+            }`}
+            onClick={() => navigate("/profile")}
           >
-            Log In
+            {viewstate}
           </li>
         </ul>
       </header>

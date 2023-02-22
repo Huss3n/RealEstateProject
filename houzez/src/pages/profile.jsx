@@ -1,6 +1,10 @@
 import React, { useState } from "react";
-import { getAuth } from "firebase/auth";
+import { getAuth, updateProfile } from "firebase/auth";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
+import { doc, updateDoc } from "firebase/firestore";
+// import { db } from "firebase/firestore";
+import { db } from "../firebase";
 
 export default function Profile() {
   const auth = getAuth();
@@ -12,10 +16,39 @@ export default function Profile() {
   const { username, email } = userData;
 
   const navigate = useNavigate();
+
+  // edit details
+  const [editDetails, setEditDetails] = useState(false);
+
+  function onEdit(e) {
+    setUserData((prevState) => ({
+      ...prevState,
+      [e.target.id]: e.target.value,
+    }));
+  }
   // signout function
   function signout() {
     auth.signOut();
     navigate("/");
+  }
+  // submit changes to firebase auth
+  async function onSubmit() {
+    try {
+      if (auth.currentUser.displayName !== username) {
+        // submit new display name
+        await updateProfile(auth.currentUser, {
+          displayName: username,
+        });
+        // submit new name to firestore
+        const userRef = doc(db, "users", auth.currentUser.uid);
+        await updateDoc(userRef, {
+          username,
+        });
+      }
+      toast.success("Username updated!");
+    } catch (error) {
+      toast.error(`Could not update profile ${error}`);
+    }
   }
   return (
     <>
@@ -25,7 +58,14 @@ export default function Profile() {
         {/* user details  */}
         <div className="w-full md:w-[50%] mt-6 px-3">
           <form>
-            <input type="text" id="name" value={username} disabled className="w-full px-4 py-2 text-xl text-gray-500 bg-white border-gray-300 rounded transition ease-in-out" />
+            <input
+              type="text"
+              id="username"
+              value={username}
+              disabled={!editDetails}
+              onChange={onEdit}
+              className={`w-full px-4 py-2 text-xl text-gray-500 bg-white border-gray-300 rounded transition ease-in-out ${editDetails && "bg-red-200 focus:bg-red-300"}`}
+            />
             <input type="text" id="email" value={email} disabled className="w-full px-4 py-2 text-xl text-gray-500 bg-white border-gray-300 rounded transition ease-in-out mt-6" />
           </form>
         </div>
@@ -34,7 +74,15 @@ export default function Profile() {
         <div className="flex justify-end whitespace-nowrap text-sm sm:text-lg mt-4 space-x-5 mb-4">
           <p className="pr-1 text-blue-400 flex items-center">
             Edit profile:
-            <span className="cursor-pointer text-decoration-line: underline text-red-400 ml-3 hover:text-xl transition ease-in-out duration-150">🖍️</span>
+            <span
+              className="cursor-pointer text-decoration-line: underline text-red-400 ml-3 hover:text-xl transition ease-in-out duration-150"
+              onClick={() => {
+                editDetails && onSubmit();
+                setEditDetails((prevState) => !prevState);
+              }}
+            >
+              {editDetails ? "Save" : "🖍️"}
+            </span>
           </p>
           <p className="pl-28 text-blue-400 cursor-pointer hover:text-red-400 transition ease-out duration-200" onClick={signout}>
             Sign out
