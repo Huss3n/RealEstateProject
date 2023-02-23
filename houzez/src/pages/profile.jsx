@@ -5,6 +5,8 @@ import { toast } from "react-toastify";
 import { doc, updateDoc } from "firebase/firestore";
 // import { db } from "firebase/firestore";
 import { db } from "../firebase";
+import { MdRealEstateAgent } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 export default function Profile() {
   const auth = getAuth();
@@ -88,6 +90,17 @@ export default function Profile() {
             Sign out
           </p>
         </div>
+        {/* <div className="w-full flex justify-center">
+          <Link to={"/create-listing "}>
+            <button
+              className="flex justify-start items-center space-x-10 p-2 bg-blue-600 text-white uppercase px-7 w-full py-3 text-sm font-medium rounded-lg shadow-md hover:bg-blue-700 transition ease-out duration-150 hover:shadow-xl active:bg-blue-900"
+              type="submit"
+            >
+              <MdRealEstateAgent className="mr-2 text-3xl bg-black rounded-full p-1 border-2" />
+              Sell or rent your home
+            </button>
+          </Link>
+        </div> */}
       </section>
     </>
   );
