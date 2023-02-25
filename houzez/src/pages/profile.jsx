@@ -92,7 +92,7 @@ export default function Profile() {
             type="submit"
             className="w-full bg-blue-600 text-white uppercase text-sm px-7 py-3 font-medium rounded-3xl shadow-md hover:bg-blue-700 transition duration-150 ease-in-out hover:shadow-lg active:bg-blue-800 p-4 mt-4"
           >
-            <Link to={"/add-listing"} className="flex justify-center items-center">
+            <Link to={"/Add-listing"} className="flex justify-center items-center">
               <MdRealEstateAgent className="mr-2 text-3xl bg-red-400 rounded-full p-2 border-2" />
               Add a listing{" "}
             </Link>

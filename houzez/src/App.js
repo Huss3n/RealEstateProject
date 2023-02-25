@@ -5,6 +5,8 @@ import Register from "./pages/Register";
 import Profile from "./pages/profile";
 import ForgotPassword from "./pages/forgotPassword";
 import Offers from "./pages/offers";
+import Addlisting from "./pages/Addlisting";
+
 import Header from "./components/header";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -26,6 +28,7 @@ function App() {
           <Route path="/register" element={<Register />}></Route>
           <Route path="/forgotPassword" element={<ForgotPassword />}></Route>
           <Route path="/offers" element={<Offers />}></Route>
+          <Route path="/Add-listing" element={<Addlisting />}></Route>
         </Routes>
       </Router>
       <ToastContainer
