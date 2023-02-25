@@ -69,38 +69,26 @@ export default function Profile() {
               className={`w-full px-4 py-2 text-xl text-gray-500 bg-white border-gray-300 rounded transition ease-in-out ${editDetails && "bg-red-200 focus:bg-red-300"}`}
             />
             <input type="text" id="email" value={email} disabled className="w-full px-4 py-2 text-xl text-gray-500 bg-white border-gray-300 rounded transition ease-in-out mt-6" />
+
+            <div className="flex justify-between whitespace-nowrap text-sm sm:text-lg mt-4 space-x-5 mb-4 w-full p-2">
+              <p className="pr-1 text-blue-400 flex items-center">
+                Edit profile:
+                <span
+                  className="cursor-pointer text-decoration-line: underline text-red-400 ml-3 hover:text-xl transition ease-in-out duration-150"
+                  onClick={() => {
+                    editDetails && onSubmit();
+                    setEditDetails((prevState) => !prevState);
+                  }}
+                >
+                  {editDetails ? "Save" : "🖍️"}
+                </span>
+              </p>
+              <p className="pl-28 text-blue-400 cursor-pointer hover:text-red-400 transition ease-out duration-200" onClick={signout}>
+                Sign out
+              </p>
+            </div>
           </form>
         </div>
-
-        {/* edit details  */}
-        <div className="flex justify-end whitespace-nowrap text-sm sm:text-lg mt-4 space-x-5 mb-4">
-          <p className="pr-1 text-blue-400 flex items-center">
-            Edit profile:
-            <span
-              className="cursor-pointer text-decoration-line: underline text-red-400 ml-3 hover:text-xl transition ease-in-out duration-150"
-              onClick={() => {
-                editDetails && onSubmit();
-                setEditDetails((prevState) => !prevState);
-              }}
-            >
-              {editDetails ? "Save" : "🖍️"}
-            </span>
-          </p>
-          <p className="pl-28 text-blue-400 cursor-pointer hover:text-red-400 transition ease-out duration-200" onClick={signout}>
-            Sign out
-          </p>
-        </div>
-        {/* <div className="w-full flex justify-center">
-          <Link to={"/create-listing "}>
-            <button
-              className="flex justify-start items-center space-x-10 p-2 bg-blue-600 text-white uppercase px-7 w-full py-3 text-sm font-medium rounded-lg shadow-md hover:bg-blue-700 transition ease-out duration-150 hover:shadow-xl active:bg-blue-900"
-              type="submit"
-            >
-              <MdRealEstateAgent className="mr-2 text-3xl bg-black rounded-full p-1 border-2" />
-              Sell or rent your home
-            </button>
-          </Link>
-        </div> */}
       </section>
     </>
   );
