@@ -6,8 +6,10 @@ export default function Addlisting() {
     name: "",
     bedrooms: 1,
     bathroom: 1,
+    parking: false,
+    furnished: false,
   });
-  const { type, name, bedrooms, bathroom } = formData;
+  const { type, name, bedrooms, bathroom, parking, furnished } = formData;
   function onChange() {}
   return (
     <main className="max-w-md px-2 mx-auto">
@@ -78,6 +80,57 @@ export default function Addlisting() {
               className="px-4 py-2 text-lg text-gray-700 bg-white border-gray-700 transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white text-center rounded-2xl mt-2 w-full"
             />
           </div>
+        </div>
+        <p className="text-lg mt-6 font-semibold mb-5">Parking spots</p>
+        <div className="flex">
+          <button
+            type="button"
+            id="parking"
+            value={true}
+            onclick={onChange}
+            className={`mr-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded-3xl hover:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
+              !parking ? "bg-white text-black" : "bg-slate-600 text-white"
+            }`}
+          >
+            Yes
+          </button>
+          <button
+            type="button"
+            id="parking"
+            value={false}
+            onclick={onChange}
+            className={` rounded-3xl ml-3 px-7 py-3 font-medium text-sm uppercase shadow-md  hover:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
+              parking ? "bg-white text-black" : "bg-slate-600 text-white"
+            }`}
+          >
+            No
+          </button>
+        </div>
+
+        <p className="text-lg mt-6 font-semibold mb-5">Furnished</p>
+        <div className="flex">
+          <button
+            type="button"
+            id="furnished"
+            value={true}
+            onclick={onChange}
+            className={`mr-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded-3xl hover:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
+              !furnished ? "bg-white text-black" : "bg-slate-600 text-white"
+            }`}
+          >
+            Yes
+          </button>
+          <button
+            type="button"
+            id="furnished"
+            value={false}
+            onclick={onChange}
+            className={` rounded-3xl ml-3 px-7 py-3 font-medium text-sm uppercase shadow-md  hover:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
+              furnished ? "bg-white text-black" : "bg-slate-600 text-white"
+            }`}
+          >
+            No
+          </button>
         </div>
       </form>
     </main>
