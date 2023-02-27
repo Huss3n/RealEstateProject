@@ -211,7 +211,7 @@ export default function Addlisting() {
         {offer && (
           <div>
             <div className="">
-              <p className="text-lg font-semibold"> Discounted price</p>
+              <p className="text-lg font-semibold mt-3"> Discounted price</p>
               <div className="flex w-full justify-center items-center space-x-8 mt-3">
                 <input
                   type="number"
@@ -225,13 +225,29 @@ export default function Addlisting() {
                 />
                 {type === "rent" && (
                   <div>
-                    <p className="text-md w-full whitespace-nowrap">$ / Month</p>
+                    <p className="text-md w-full whitespace-nowrap">Kshs / Month</p>
                   </div>
                 )}
               </div>
             </div>
           </div>
         )}
+
+        {/* image  */}
+        <div className="mb-6">
+          <p className="text-lg font-semibold">Images</p>
+          {/* modify this for iphone photos  */}
+          <p className="text-gray-400">The first image will be the cover and the (max 8)</p>
+          <input
+            type="file"
+            id="images"
+            onChange={onChange}
+            accept=".jpg, .png, .jpeg"
+            multiple
+            required
+            className="w-full px-3 py-2 text-gray-800 bg-white border border-gray-300 rounded-2xl transition duration-150 ease-in-out focus:bg-white focus:border-blue-200"
+          />
+        </div>
       </form>
     </main>
   );
