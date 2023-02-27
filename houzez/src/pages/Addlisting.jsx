@@ -248,6 +248,12 @@ export default function Addlisting() {
             className="w-full px-3 py-2 text-gray-800 bg-white border border-gray-300 rounded-2xl transition duration-150 ease-in-out focus:bg-white focus:border-blue-200"
           />
         </div>
+        <button
+          type="submit"
+          className="mb-6 w-full px-7 py-3 bg-blue-600 text-white font-medium text-sm uppercase rounded-2xl shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+        >
+          Add Listing
+        </button>
       </form>
     </main>
   );
