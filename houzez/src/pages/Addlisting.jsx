@@ -234,7 +234,7 @@ export default function Addlisting() {
         )}
 
         {/* image  */}
-        <div className="mb-6">
+        <div className="mb-6 mt-4">
           <p className="text-lg font-semibold">Images</p>
           {/* modify this for iphone photos  */}
           <p className="text-gray-400">The first image will be the cover and the (max 8)</p>
