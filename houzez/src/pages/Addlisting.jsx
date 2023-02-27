@@ -8,8 +8,13 @@ export default function Addlisting() {
     bathroom: 1,
     parking: false,
     furnished: false,
+    address: "",
+    description: "",
+    offer: true,
+    regularPrice: 0,
+    discountedPrice: 0,
   });
-  const { type, name, bedrooms, bathroom, parking, furnished } = formData;
+  const { type, name, bedrooms, bathroom, parking, furnished, address, description, offer, regularPrice, discountedPrice } = formData;
   function onChange() {}
   return (
     <main className="max-w-md px-2 mx-auto">
@@ -106,7 +111,6 @@ export default function Addlisting() {
             No
           </button>
         </div>
-
         <p className="text-lg mt-6 font-semibold mb-5">Furnished</p>
         <div className="flex">
           <button
@@ -132,6 +136,102 @@ export default function Addlisting() {
             No
           </button>
         </div>
+        <p className="tex-lg mt-6 font-semibold mb-3">Address</p>
+        <textarea
+          type="text"
+          id="address"
+          value={address}
+          onChange={onChange}
+          placeholder="Enter property address"
+          required
+          maxLength={60}
+          minLength={10}
+          className="w-full px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded-2xl transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white focus:border-blue-500"
+        />
+        <p className="tex-lg mt-6 font-semibold mb-3">Description</p>
+        <input
+          type="text"
+          id="description"
+          value={description}
+          onChange={onChange}
+          placeholder="Enter property description"
+          required
+          maxLength={32}
+          minLength={10}
+          className="w-full px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded-2xl transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white focus:border-blue-500 mb-6"
+        />
+        <p className="text-lg font-semibold mb-5">Offer</p>
+        <div className="flex mb-6">
+          <button
+            type="button"
+            id="offer"
+            value={true}
+            onclick={onChange}
+            className={`mr-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded-3xl hover:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
+              !offer ? "bg-white text-black" : "bg-slate-600 text-white"
+            }`}
+          >
+            Yes
+          </button>
+          <button
+            type="button"
+            id="offer"
+            value={false}
+            onclick={onChange}
+            className={` rounded-3xl ml-3 px-7 py-3 font-medium text-sm uppercase shadow-md  hover:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
+              offer ? "bg-white text-black" : "bg-slate-600 text-white"
+            }`}
+          >
+            No
+          </button>
+        </div>
+        {/* regular price  */}
+        <div>
+          <div className="">
+            <p className="text-lg font-semibold"> Regular price</p>
+            <div className="flex w-full justify-center items-center space-x-8 mt-3">
+              <input
+                type="number"
+                id="regularPrice"
+                value={regularPrice}
+                onChange={onChange}
+                max={50}
+                min={500000000}
+                required
+                className="w-full px-4 py-2 text-xl text-gray-700 bg-white border border-gray-300 rounded-3xl transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white focus:border-slate-500 text-center"
+              />
+              {type === "rent" && (
+                <div>
+                  <p className="text-md w-full whitespace-nowrap">Kshs / Month</p>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+        {offer && (
+          <div>
+            <div className="">
+              <p className="text-lg font-semibold"> Discounted price</p>
+              <div className="flex w-full justify-center items-center space-x-8 mt-3">
+                <input
+                  type="number"
+                  id="discountedPrice"
+                  value={discountedPrice}
+                  onChange={onChange}
+                  max={50}
+                  min={500000000}
+                  required={offer}
+                  className="w-full px-4 py-2 text-xl text-gray-700 bg-white border border-gray-300 rounded-3xl transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white focus:border-slate-500 text-center"
+                />
+                {type === "rent" && (
+                  <div>
+                    <p className="text-md w-full whitespace-nowrap">$ / Month</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
       </form>
     </main>
   );
