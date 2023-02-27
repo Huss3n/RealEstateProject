@@ -13,8 +13,9 @@ export default function Addlisting() {
     offer: true,
     regularPrice: 0,
     discountedPrice: 0,
+    squarefeet: 0,
   });
-  const { type, name, bedrooms, bathroom, parking, furnished, address, description, offer, regularPrice, discountedPrice } = formData;
+  const { type, name, bedrooms, bathroom, parking, furnished, address, description, offer, regularPrice, discountedPrice, squarefeet } = formData;
   function onChange() {}
   return (
     <main className="max-w-md px-2 mx-auto">
@@ -59,6 +60,7 @@ export default function Addlisting() {
           className="w-full px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded-2xl transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white focus:border-blue-500 mb-6"
         />
         <div className="flex space-x-6 mb-5">
+          {/* bedrooms  */}
           <div>
             <p className="text-lg font-semibold">Beds</p>
             <input
@@ -72,6 +74,7 @@ export default function Addlisting() {
               className="px-4 py-2 text-lg text-gray-700 bg-white border-gray-700 transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white text-center rounded-2xl mt-2 w-full"
             />
           </div>
+          {/* bathrooms  */}
           <div>
             <p className="text-lg font-semibold">Baths</p>
             <input
@@ -81,6 +84,21 @@ export default function Addlisting() {
               onChange={onChange}
               min={1}
               max={20}
+              required
+              className="px-4 py-2 text-lg text-gray-700 bg-white border-gray-700 transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white text-center rounded-2xl mt-2 w-full"
+            />
+          </div>
+          {/* squarefeet */}
+
+          <div>
+            <p className="text-lg font-semibold">Sqft</p>
+            <input
+              type="number"
+              id="squarefeet"
+              value={squarefeet}
+              onChange={onChange}
+              min={1}
+              max={50000}
               required
               className="px-4 py-2 text-lg text-gray-700 bg-white border-gray-700 transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white text-center rounded-2xl mt-2 w-full"
             />
@@ -237,7 +255,7 @@ export default function Addlisting() {
         <div className="mb-6 mt-4">
           <p className="text-lg font-semibold">Images</p>
           {/* modify this for iphone photos  */}
-          <p className="text-gray-400">The first image will be the cover and the (max 8)</p>
+          <p className="text-gray-300 mt-2 mb-2">The first image will be the cover and the (max 8)</p>
           <input
             type="file"
             id="images"
