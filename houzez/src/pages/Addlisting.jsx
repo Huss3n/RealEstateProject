@@ -256,6 +256,7 @@ export default function Addlisting() {
           <p className="text-lg font-semibold">Images</p>
           {/* modify this for iphone photos  */}
           <p className="text-gray-300 mt-2 mb-2">The first image will be the cover and the (max 8)</p>
+          <p className="text-gray-200 mt-2 mb-2 font-semibold text-sm">Leasing of the property will lead to disqualification </p>
           <input
             type="file"
             id="images"
