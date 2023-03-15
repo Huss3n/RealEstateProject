@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 export default function Addlisting() {
-  const [geoLocationEnabled, setGeoLocationEnabled] = useState(true);
+  const [geoLocationEnabled, setGeoLocationEnabled] = useState(false);
   const [formData, setFormData] = useState({
     type: "rent",
     name: "",
@@ -200,7 +200,36 @@ export default function Addlisting() {
           required
           className="w-full px-4 py-2 text-xl text-gray-700 bg-white border border-gray-300 rounded-3xl transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white focus:border-slate-600 mb-6"
         />
-
+        {!geoLocationEnabled && (
+          <div className="flex space-x-6 justify-start mb-6">
+            <div className="">
+              <p className="text-lg font semi-bold">latitude</p>
+              <input
+                type="number"
+                id="latitude"
+                value={latitude}
+                onChange={onChange}
+                required
+                min={-90}
+                max={90}
+                className="w-full px-4 py-2 text-xl text-gray-700 bg-white border border-gray-300 rounded-3xl transition duration-150 ease-in-out focus:bg-white focus:text-gray-900 focus:border-slate-600 text-center"
+              ></input>
+            </div>
+            <div className="">
+              <p className="text-lg font semi-bold">longitude</p>
+              <input
+                type="number"
+                id="longitude"
+                value={longitude}
+                onChange={onChange}
+                required
+                min={-180}
+                max={180}
+                className="w-full px-4 py-2 text-xl text-gray-700 bg-white border border-gray-300 rounded-3xl transition duration-150 ease-in-out focus:bg-white focus:text-gray-900 focus:border-slate-600 text-center"
+              ></input>
+            </div>
+          </div>
+        )}
         {/* description  */}
         <p className="text-lg font-semibold">Description</p>
         <textarea
