@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 export default function Addlisting() {
+  const [geoLocationEnabled, setGeoLocationEnabled] = useState(true);
   const [formData, setFormData] = useState({
     type: "rent",
     name: "",
@@ -14,8 +15,10 @@ export default function Addlisting() {
     regularPrice: 0,
     discountedPrice: 0,
     squarefeet: 0,
+    latitude: 0,
+    longitude: 0,
   });
-  const { type, name, bedrooms, bathrooms, parking, furnished, address, description, offer, regularPrice, discountedPrice, squarefeet } = formData;
+  const { type, name, bedrooms, bathrooms, parking, furnished, address, description, offer, regularPrice, discountedPrice, squarefeet, latitude, longitude } = formData;
 
   function onChange(e) {
     let boolean = null;
