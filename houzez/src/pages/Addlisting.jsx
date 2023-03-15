@@ -16,25 +16,7 @@ export default function Addlisting() {
     squarefeet: 0,
   });
   const { type, name, bedrooms, bathrooms, parking, furnished, address, description, offer, regularPrice, discountedPrice, squarefeet } = formData;
-  // function onChange(e) {
-  //   let bolean = null;
-  //   if (e.target.value === "true") {
-  //     bolean = true;
-  //   }
-  //   if (e.target.value === "false") {
-  //     bolean = false;
-  //   }
-  //   // photos
-  //   if (e.target.files) {
-  //     setFormData((prevState) => ({
-  //       ...prevState,
-  //       images: e.target.files,
-  //     }));
-  //   }
-  //   if (!e.target.files) {
-  //     setFormData((prevState) => ({ ...prevState, [e.target.id]: bolean ?? e.target.value }));
-  //   }
-  // }
+
   function onChange(e) {
     let boolean = null;
     if (e.target.value === "true") {
@@ -58,6 +40,7 @@ export default function Addlisting() {
       }));
     }
   }
+
   return (
     <main className="max-w-md px-2 mx-auto">
       <h1 className="text-3xl text-center mt-6 font-bold">Add a listing</h1>
@@ -65,18 +48,7 @@ export default function Addlisting() {
       <form>
         <p className="text-lg mt-6 font-semibold mb-5">Sell or Rent your property</p>
         <div className="flex">
-          {/* <button
-            type="button"
-            id="type"
-            value="sell"
-            onclick={onChange}
-            className={`mr-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded-3xl hover:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              type === "rent" ? "bg-white text-black" : "bg-slate-600 text-white"
-            }`}
-          >
-            Sell
-          </button> */}
-
+          {/* sell button  */}
           <button
             type="button"
             id="type"
@@ -88,18 +60,8 @@ export default function Addlisting() {
           >
             sell
           </button>
-          {/* <button
-            type="button"
-            id="type"
-            value="rent"
-            onclick={onChange}
-            className={` rounded-3xl ml-3 px-7 py-3 font-medium text-sm uppercase shadow-md  hover:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              type === "sell" ? "bg-white text-black" : "bg-slate-600 text-white"
-            }`}
-          >
-            Rent
-          </button> */}
 
+          {/* rent button  */}
           <button
             type="button"
             id="type"
@@ -139,6 +101,7 @@ export default function Addlisting() {
               className="px-4 py-2 text-lg text-gray-700 bg-white border-gray-700 transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white text-center rounded-2xl mt-2 w-full"
             />
           </div>
+
           {/* bathrooms  */}
           <div>
             <p className="text-lg font-semibold">Baths</p>
@@ -153,8 +116,8 @@ export default function Addlisting() {
               className="px-4 py-2 text-lg text-gray-700 bg-white border-gray-700 transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white text-center rounded-2xl mt-2 w-full"
             />
           </div>
-          {/* squarefeet */}
 
+          {/* squarefeet */}
           <div>
             <p className="text-lg font-semibold">Sqft</p>
             <input
@@ -162,39 +125,15 @@ export default function Addlisting() {
               id="squarefeet"
               value={squarefeet}
               onChange={onChange}
-              min={1}
+              min={200}
               max={50000}
               required
               className="px-4 py-2 text-lg text-gray-700 bg-white border-gray-700 transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white text-center rounded-2xl mt-2 w-full"
             />
           </div>
         </div>
-        {/* <p className="text-lg mt-6 font-semibold mb-5">Parking spots</p>
-        <div className="flex">
-          <button
-            type="button"
-            id="parking"
-            value={true}
-            onclick={onChange}
-            className={`mr-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded-3xl hover:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              !parking ? "bg-white text-black" : "bg-slate-600 text-white"
-            }`}
-          >
-            Yes
-          </button>
-          <button
-            type="button"
-            id="parking"
-            value={false}
-            onclick={onChange}
-            className={` rounded-3xl ml-3 px-7 py-3 font-medium text-sm uppercase shadow-md  hover:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              parking ? "bg-white text-black" : "bg-slate-600 text-white"
-            }`}
-          >
-            No
-          </button>
-        </div> */}
 
+        {/* parking spot  */}
         <p className="text-lg mt-6 font-semibold">Parking spot</p>
         <div className="flex mb-2 mt-2">
           <button
@@ -220,44 +159,7 @@ export default function Addlisting() {
             no
           </button>
         </div>
-        {/* <p className="text-lg mt-6 font-semibold mb-5">Furnished</p>
-        <div className="flex">
-          <button
-            type="button"
-            id="furnished"
-            value={true}
-            onclick={onChange}
-            className={`mr-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded-3xl hover:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              !furnished ? "bg-white text-black" : "bg-slate-600 text-white"
-            }`}
-          >
-            Yes
-          </button>
-          <button
-            type="button"
-            id="furnished"
-            value={false}
-            onclick={onChange}
-            className={` rounded-3xl ml-3 px-7 py-3 font-medium text-sm uppercase shadow-md  hover:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              furnished ? "bg-white text-black" : "bg-slate-600 text-white"
-            }`}
-          >
-            No
-          </button>
-        </div>
-        <p className="tex-lg mt-6 font-semibold mb-3">Address</p>
-        <textarea
-          type="text"
-          id="address"
-          value={address}
-          onChange={onChange}
-          placeholder="Enter property address"
-          required
-          maxLength={60}
-          minLength={10}
-          className="w-full px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded-2xl transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white focus:border-blue-500"
-        /> */}
-
+        {/* furnished  */}
         <p className="text-lg mt-6 font-semibold">Furnished</p>
         <div className="flex">
           <button
@@ -283,6 +185,8 @@ export default function Addlisting() {
             no
           </button>
         </div>
+
+        {/* address  */}
         <p className="text-lg mt-6 font-semibold">Address</p>
         <textarea
           type="text"
@@ -293,107 +197,8 @@ export default function Addlisting() {
           required
           className="w-full px-4 py-2 text-xl text-gray-700 bg-white border border-gray-300 rounded-3xl transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white focus:border-slate-600 mb-6"
         />
-        {/* <p className="tex-lg mt-6 font-semibold mb-3">Description</p>
-        <input
-          type="text"
-          id="description"
-          value={description}
-          onChange={onChange}
-          placeholder="Enter property description"
-          required
-          maxLength={32}
-          minLength={10}
-          className="w-full px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded-2xl transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white focus:border-blue-500 mb-6"
-        /> */}
-        {/* <p className="text-lg font-semibold mb-5">Offer</p>
-        <div className="flex mb-6">
-          <button
-            type="button"
-            id="offer"
-            value={true}
-            onclick={onChange}
-            className={`mr-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded-3xl hover:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              !offer ? "bg-white text-black" : "bg-slate-600 text-white"
-            }`}
-          >
-            Yes
-          </button>
-          <button
-            type="button"
-            id="offer"
-            value={false}
-            onclick={onChange}
-            className={` rounded-3xl ml-3 px-7 py-3 font-medium text-sm uppercase shadow-md  hover:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              offer ? "bg-white text-black" : "bg-slate-600 text-white"
-            }`}
-          >
-            No
-          </button>
-        </div> */}
-        {/* regular price  */}
-        {/* <div>
-          <div className="">
-            <p className="text-lg font-semibold"> Regular price</p>
-            <div className="flex w-full justify-center items-center space-x-8 mt-3">
-              <input
-                type="number"
-                id="regularPrice"
-                value={regularPrice}
-                onChange={onChange}
-                max={50}
-                min={500000000}
-                required
-                className="w-full px-4 py-2 text-xl text-gray-700 bg-white border border-gray-300 rounded-3xl transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white focus:border-slate-500 text-center"
-              />
-              {type === "rent" && (
-                <div>
-                  <p className="text-md w-full whitespace-nowrap">Kshs / Month</p>
-                </div>
-              )}
-            </div>
-          </div>
-        </div> */}
-        {/* {offer && (
-          <div>
-            <div className="">
-              <p className="text-lg font-semibold mt-3"> Discounted price</p>
-              <div className="flex w-full justify-center items-center space-x-8 mt-3">
-                <input
-                  type="number"
-                  id="discountedPrice"
-                  value={discountedPrice}
-                  onChange={onChange}
-                  max={50}
-                  min={500000000}
-                  required={offer}
-                  className="w-full px-4 py-2 text-xl text-gray-700 bg-white border border-gray-300 rounded-3xl transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white focus:border-slate-500 text-center"
-                />
-                {type === "rent" && (
-                  <div>
-                    <p className="text-md w-full whitespace-nowrap">Kshs / Month</p>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        )} */}
 
-        {/* image  */}
-        {/* <div className="mb-6 mt-4">
-          <p className="text-lg font-semibold">Images</p>
-          modify this for iphone photos 
-          <p className="text-gray-300 mt-2 mb-2">The first image will be the cover and the (max 8)</p>
-          <input
-            type="file"
-            id="images"
-            onChange={onChange}
-            accept=".jpg, .png, .jpeg"
-            multiple
-            required
-            className="w-full px-3 py-2 text-gray-800 bg-white border border-gray-300 rounded-2xl transition duration-150 ease-in-out focus:bg-white focus:border-blue-200"
-          />
-        </div> */}
-
+        {/* description  */}
         <p className="text-lg font-semibold">Description</p>
         <textarea
           type="text"
@@ -404,6 +209,8 @@ export default function Addlisting() {
           required
           className="w-full px-4 py-2 text-xl text-gray-700 bg-white border border-gray-300 rounde-3xl transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white focus:border-slate-600 mb-6"
         />
+
+        {/* offer  */}
         <p className="text-lg font-semibold">Offer</p>
         <div className="flex mb-6">
           <button
@@ -411,7 +218,7 @@ export default function Addlisting() {
             id="offer"
             value={true}
             onClick={onChange}
-            className={`mr-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded-3xl hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
+            className={`mr-3 px-7 mt-2 py-3 font-medium text-sm uppercase shadow-md rounded-3xl hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
               !offer ? "bg-white text-black" : "bg-slate-600 text-white"
             }`}
           >
@@ -429,6 +236,8 @@ export default function Addlisting() {
             no
           </button>
         </div>
+
+        {/* regularPrice  */}
         <div className="flex items-center mb-6">
           <div className="">
             <p className="text-lg font-semibold">Regular price</p>
@@ -451,6 +260,8 @@ export default function Addlisting() {
             </div>
           </div>
         </div>
+
+        {/* discountedPrice  */}
         {offer && (
           <div className="flex items-center mb-6">
             <div className="">
@@ -475,6 +286,8 @@ export default function Addlisting() {
             </div>
           </div>
         )}
+
+        {/* images  */}
         <div className="mb-6">
           <p className="text-lg font-semibold">Images</p>
           <p className="text-gray-600">The first image will be the cover (max 6)</p>
@@ -488,6 +301,8 @@ export default function Addlisting() {
             className="w-full px-3 py-1.5 text-gray-700 bg-white border border-gray-300 rounded-3xl transition duration-150 ease-in-out focus:bg-white focus:border-slate-600"
           />
         </div>
+
+        {/* add listing button  */}
         <button
           type="submit"
           className="mb-6 w-full px-7 py-3 bg-blue-600 text-white font-medium text-sm uppercase rounded-3xl shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
@@ -498,3 +313,4 @@ export default function Addlisting() {
     </main>
   );
 }
+// fix the maps api
