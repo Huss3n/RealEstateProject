@@ -18,17 +18,28 @@ function App() {
       <Router>
         <Header />
         <Routes>
+          {/* home path  */}
           <Route path="/" element={<Home />}></Route>
 
+          {/* profile path  */}
           <Route path="/profile" element={<PrivateRoute />}>
             <Route path="/profile" element={<Profile />}></Route>
           </Route>
 
+          {/* login path  */}
           <Route path="/Login" element={<Login />}></Route>
+
+          {/* regiser path  */}
           <Route path="/register" element={<Register />}></Route>
+
+          {/* forgot password path  */}
           <Route path="/forgotPassword" element={<ForgotPassword />}></Route>
+
+          {/* offers path  */}
           <Route path="/offers" element={<Offers />}></Route>
-          <Route path="Add-Listing" element={<PrivateRoute />}>
+
+          {/* add listing protected path  */}
+          <Route path="/Add-Listing" element={<PrivateRoute />}>
             <Route path="/Add-Listing" element={<Addlisting />}></Route>
           </Route>
         </Routes>

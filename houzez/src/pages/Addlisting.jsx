@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
+import Loading from "../components/Loading";
 
 export default function Addlisting() {
-  const [geoLocationEnabled, setGeoLocationEnabled] = useState(false);
+  const [geoLocationEnabled, setGeoLocationEnabled] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     type: "rent",
     name: "",
@@ -17,8 +20,9 @@ export default function Addlisting() {
     squarefeet: 0,
     latitude: 0,
     longitude: 0,
+    images: {},
   });
-  const { type, name, bedrooms, bathrooms, parking, furnished, address, description, offer, regularPrice, discountedPrice, squarefeet, latitude, longitude } = formData;
+  const { type, name, bedrooms, bathrooms, parking, furnished, address, description, offer, regularPrice, discountedPrice, squarefeet, latitude, longitude, images } = formData;
 
   function onChange(e) {
     let boolean = null;
@@ -44,11 +48,41 @@ export default function Addlisting() {
     }
   }
 
+  // submit function
+  async function onSubmit(e) {
+    e.preventDefault();
+    setLoading(true);
+
+    // check conditions
+    // regular price should be more than discounted price
+    if (discountedPrice >= regularPrice) {
+      setLoading(false);
+      toast.error("Discounted price cannot be more than regular price");
+      return;
+    }
+    // image condition. max allowed image are 40
+    if (images.length > 40) {
+      setLoading(false);
+      toast.error("Max of 40 images allowed");
+      return;
+    }
+    // let geolocaion = {};
+    // let location; // location we get from the api
+    // if (geoLocationEnabled) {
+    //   // if true fetch data from api
+    //   const response = await fetch(`https://maps.google.api.com/maps/api/geocode/json?address=${address}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`);
+    //   const data = await response.json();
+    //   console.log(data);
+    // }
+  }
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <main className="max-w-md px-2 mx-auto">
       <h1 className="text-3xl text-center mt-6 font-bold">Add a listing</h1>
       {/* use drop downs */}
-      <form>
+      <form onSubmit={onSubmit}>
         <p className="text-lg mt-6 font-semibold mb-5">Sell or Rent your property</p>
         <div className="flex">
           {/* sell button  */}
@@ -320,19 +354,20 @@ export default function Addlisting() {
         )}
 
         {/* images  */}
-        <div className="mb-6">
+        {/* <div className="mb-6">
           <p className="text-lg font-semibold">Images</p>
           <p className="text-gray-600">The first image will be the cover (max 6)</p>
           <input
             type="file"
             id="images"
+            value={images}
             onChange={onChange}
             accept=".jpg,.png,.jpeg"
             multiple
             required
             className="w-full px-3 py-1.5 text-gray-700 bg-white border border-gray-300 rounded-3xl transition duration-150 ease-in-out focus:bg-white focus:border-slate-600"
           />
-        </div>
+        </div> */}
 
         {/* add listing button  */}
         <button
