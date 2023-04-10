@@ -1,351 +1,251 @@
-import React, { useState } from "react";
-import { toast } from "react-toastify";
-import Loading from "../components/Loading";
+import { useState } from "react";
 
 export default function Addlisting() {
-  const [geoLocationEnabled, setGeoLocationEnabled] = useState(true);
-  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     type: "rent",
-    name: "",
+    propertyName: "",
     bedrooms: 1,
     bathrooms: 1,
     parking: false,
     furnished: false,
     address: "",
     description: "",
-    offer: true,
-    regularPrice: 0,
-    discountedPrice: 0,
-    squarefeet: 0,
-    latitude: 0,
-    longitude: 0,
-    images: {},
+    offer: false,
+    regularPrice: 1,
+    discountedPrice: 1,
   });
-  const { type, name, bedrooms, bathrooms, parking, furnished, address, description, offer, regularPrice, discountedPrice, squarefeet, latitude, longitude, images } = formData;
-
-  function onChange(e) {
-    let boolean = null;
-    if (e.target.value === "true") {
-      boolean = true;
-    }
-    if (e.target.value === "false") {
-      boolean = false;
-    }
-    // Files
-    if (e.target.files) {
-      setFormData((prevState) => ({
-        ...prevState,
-        images: e.target.files,
-      }));
-    }
-    // Text/Boolean/Number
-    if (!e.target.files) {
-      setFormData((prevState) => ({
-        ...prevState,
-        [e.target.id]: boolean ?? e.target.value,
-      }));
-    }
-  }
-
-  // submit function
-  async function onSubmit(e) {
-    e.preventDefault();
-    setLoading(true);
-
-    // check conditions
-    // regular price should be more than discounted price
-    if (discountedPrice >= regularPrice) {
-      setLoading(false);
-      toast.error("Discounted price cannot be more than regular price");
-      return;
-    }
-    // image condition. max allowed image are 40
-    if (images.length > 40) {
-      setLoading(false);
-      toast.error("Max of 40 images allowed");
-      return;
-    }
-    // let geolocaion = {};
-    // let location; // location we get from the api
-    // if (geoLocationEnabled) {
-    //   // if true fetch data from api
-    //   const response = await fetch(`https://maps.google.api.com/maps/api/geocode/json?address=${address}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`);
-    //   const data = await response.json();
-    //   console.log(data);
-    // }
-  }
-  if (loading) {
-    return <Loading />;
-  }
+  const { type, propertyName, bedrooms, bathrooms, parking, furnished, address, description, offer, regularPrice, discountedPrice } = formData;
+  function onChange() {}
   return (
     <main className="max-w-md px-2 mx-auto">
-      <h1 className="text-3xl text-center mt-6 font-bold">Add a listing</h1>
-      {/* use drop downs */}
-      <form onSubmit={onSubmit}>
-        <p className="text-lg mt-6 font-semibold mb-5">Sell or Rent your property</p>
-        <div className="flex">
-          {/* sell button  */}
+      <h1 className="text-3xl text-center mt-6 font-bold">Add new listing</h1>
+      <form>
+        <p className="text-lg mt-6 font-semibold mb-2">Sell / Rent</p>
+        <div className="flex mt-3">
+          {/* sale button  */}
           <button
             type="button"
             id="type"
             value="sale"
-            onClick={onChange}
-            className={`mr-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded-3xl hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              type === "rent" ? "bg-white text-black" : "bg-slate-600 text-white"
+            className={`mr-3 px-7 py-2 font-medium text-sm uppercase shadow-lg rounded-2xl hover:shadow-lg focus:shadow-lg active:shadow-xl transition duration-150 ease-in-out w-full ${
+              type === "rent" ? "text-black bg-white" : "bg-blue-500 text-white"
             }`}
+            onClick={onChange}
           >
-            sell
+            Sell
           </button>
 
           {/* rent button  */}
           <button
             type="button"
             id="type"
-            value="rent"
-            onClick={onChange}
-            className={`ml-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded-3xl hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              type === "sale" ? "bg-white text-black" : "bg-slate-600 text-white"
+            value="sale"
+            className={`ml-3 px-7 py-2 font-medium text-sm uppercase shadow-lg rounded-2xl hover:shadow-lg focus:shadow-lg active:shadow-xl transition duration-150 ease-in-out w-full ${
+              type === "sale" ? "text-black bg-white" : "bg-blue-500 text-white"
             }`}
+            onClick={onChange}
           >
-            rent
+            Rent
           </button>
         </div>
-        <p className="tex-lg mt-6 font-semibold mb-3">Name</p>
+
+        {/* property name  */}
+        <p className="tect-lg mt-6 font-semibold mb-2">Name</p>
         <input
           type="text"
           id="name"
-          value={name}
+          value={propertyName}
           onChange={onChange}
-          placeholder="Enter the property name"
-          required
-          maxLength={32}
+          placeholder="Enter property name"
+          maxLength={36}
           minLength={10}
-          className="w-full px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded-3xl transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white focus:border-blue-500 mb-6"
+          required
+          className="w-full px-4 py-2 text-xl text-gray-700 bg-white border border-gray-300 rounded-xl transition ease-in-out focus:text-gray-700 focus:bg-white focus:border-slate-600 mb-6 active:border-slate-600"
         />
-        <div className="flex space-x-6 mb-5">
-          {/* bedrooms  */}
+
+        {/* bedrooms and bathrooms buttons  */}
+        <div className="flex space-x-6 mb-6">
           <div>
-            <p className="text-lg font-semibold">Beds</p>
+            <p className="text-lg font-semibold mb-2">Beds</p>
             <input
               type="number"
               id="bedrooms"
               value={bedrooms}
               onChange={onChange}
               min={1}
-              max={20}
               required
-              className="px-4 py-2 text-lg text-gray-700 bg-white border-gray-700 transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white text-center rounded-2xl mt-2 w-full"
+              className="px-4 py-2 text-lg text-gray-300 bg-white border border-gray-700 transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white focus:border-slate-600 text-center rounded-xl w-full"
             />
           </div>
-
-          {/* bathrooms  */}
           <div>
-            <p className="text-lg font-semibold">Baths</p>
+            <p className="text-lg font-semibold mb-2">Bathrooms</p>
             <input
               type="number"
               id="bathrooms"
               value={bathrooms}
               onChange={onChange}
               min={1}
-              max={20}
               required
-              className="px-4 py-2 text-lg text-gray-700 bg-white border-gray-700 transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white text-center rounded-2xl mt-2 w-full"
-            />
-          </div>
-
-          {/* squarefeet */}
-          <div>
-            <p className="text-lg font-semibold">Sqft</p>
-            <input
-              type="number"
-              id="squarefeet"
-              value={squarefeet}
-              onChange={onChange}
-              min={200}
-              max={50000}
-              required
-              className="px-4 py-2 text-lg text-gray-700 bg-white border-gray-700 transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white text-center rounded-2xl mt-2 w-full"
+              className="px-4 py-2 text-lg text-gray-300 bg-white border border-gray-700 transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white focus:border-slate-600 text-center rounded-xl w-full"
             />
           </div>
         </div>
 
-        {/* parking spot  */}
-        <p className="text-lg mt-6 font-semibold">Parking spot</p>
-        <div className="flex mb-2 mt-2">
+        {/* parking spots button  */}
+        <p className="text-lg mt-6 font-semibold mb-2">Parking spot</p>
+        <div className="flex mt-3">
+          {/* sale button  */}
           <button
             type="button"
             id="parking"
             value={true}
-            onClick={onChange}
-            className={`mr-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded-3xl hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              !parking ? "bg-white text-black" : "bg-slate-600 text-white"
+            className={`mr-3 px-7 py-2 font-medium text-sm uppercase shadow-lg rounded-2xl hover:shadow-lg focus:shadow-lg active:shadow-xl transition duration-150 ease-in-out w-full ${
+              !parking ? "text-black bg-white" : "bg-blue-500 text-white"
             }`}
+            onClick={onChange}
           >
             Yes
           </button>
+
+          {/* rent button  */}
           <button
             type="button"
             id="parking"
             value={false}
-            onClick={onChange}
-            className={`ml-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded-3xl hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              parking ? "bg-white text-black" : "bg-slate-600 text-white"
+            className={`ml-3 px-7 py-2 font-medium text-sm uppercase shadow-lg rounded-2xl hover:shadow-lg focus:shadow-lg active:shadow-xl transition duration-150 ease-in-out w-full ${
+              parking ? "text-black bg-white" : "bg-blue-500 text-white"
             }`}
+            onClick={onChange}
           >
-            no
+            No
           </button>
         </div>
-        {/* furnished  */}
-        <p className="text-lg mt-6 font-semibold">Furnished</p>
-        <div className="flex">
+
+        {/* furnished section  */}
+        <p className="text-lg mt-6 font-semibold mb-2">Furnished</p>
+        <div className="flex mt-3">
+          {/* sale button  */}
           <button
             type="button"
             id="furnished"
             value={true}
-            onClick={onChange}
-            className={`mr-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded-3xl hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              !furnished ? "bg-white text-black" : "bg-slate-600 text-white"
+            className={`mr-3 px-7 py-2 font-medium text-sm uppercase shadow-lg rounded-2xl hover:shadow-lg focus:shadow-lg active:shadow-xl transition duration-150 ease-in-out w-full ${
+              !furnished ? "text-black bg-white" : "bg-blue-500 text-white"
             }`}
+            onClick={onChange}
           >
             yes
           </button>
+
+          {/* rent button  */}
           <button
             type="button"
             id="furnished"
             value={false}
-            onClick={onChange}
-            className={`ml-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded-3xl hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              furnished ? "bg-white text-black" : "bg-slate-600 text-white"
+            className={`ml-3 px-7 py-2 font-medium text-sm uppercase shadow-lg rounded-2xl hover:shadow-lg focus:shadow-lg active:shadow-xl transition duration-150 ease-in-out w-full ${
+              furnished ? "text-black bg-white" : "bg-blue-500 text-white"
             }`}
+            onClick={onChange}
           >
             no
           </button>
         </div>
 
-        {/* address  */}
-        <p className="text-lg mt-6 font-semibold">Address</p>
+        {/* address section  */}
+        <p className="text-lg font-semibold mt-2 mb-2">Address</p>
         <textarea
           type="text"
-          id="address"
           value={address}
-          onChange={onChange}
-          placeholder="Address"
+          id="address"
           required
-          className="w-full px-4 py-2 text-xl text-gray-700 bg-white border border-gray-300 rounded-3xl transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white focus:border-slate-600 mb-6"
-        />
-        {!geoLocationEnabled && (
-          <div className="flex space-x-6 justify-start mb-6">
-            <div className="">
-              <p className="text-lg font semi-bold">latitude</p>
-              <input
-                type="number"
-                id="latitude"
-                value={latitude}
-                onChange={onChange}
-                required
-                min={-90}
-                max={90}
-                className="w-full px-4 py-2 text-xl text-gray-700 bg-white border border-gray-300 rounded-3xl transition duration-150 ease-in-out focus:bg-white focus:text-gray-900 focus:border-slate-600 text-center"
-              ></input>
-            </div>
-            <div className="">
-              <p className="text-lg font semi-bold">longitude</p>
-              <input
-                type="number"
-                id="longitude"
-                value={longitude}
-                onChange={onChange}
-                required
-                min={-180}
-                max={180}
-                className="w-full px-4 py-2 text-xl text-gray-700 bg-white border border-gray-300 rounded-3xl transition duration-150 ease-in-out focus:bg-white focus:text-gray-900 focus:border-slate-600 text-center"
-              ></input>
-            </div>
-          </div>
-        )}
-        {/* description  */}
-        <p className="text-lg font-semibold">Description</p>
-        <textarea
-          type="text"
-          id="description"
-          value={description}
           onChange={onChange}
-          placeholder="Description"
-          required
-          className="w-full px-4 py-2 text-xl text-gray-700 bg-white border border-gray-300 rounde-3xl transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white focus:border-slate-600 mb-6"
+          placeholder="Enter property address"
+          className="w-full px-4 py-2 text-xl text-gray-700 bg-white border border-gray-300 rounded-xl transition ease-in-out focus:text-gray-700 focus:bg-white focus:border-slate-600 mb-2 active:border-slate-600"
         />
 
-        {/* offer  */}
-        <p className="text-lg font-semibold">Offer</p>
-        <div className="flex mb-6">
+        {/* description section  */}
+        <p className="text-lg font-semibold mb-2">Description</p>
+        <textarea
+          type="text"
+          value={description}
+          id="description"
+          required
+          onChange={onChange}
+          placeholder="Enter property description"
+          className="w-full px-4 py-2 text-xl text-gray-700 bg-white border border-gray-300 rounded-xl transition ease-in-out focus:text-gray-700 focus:bg-white focus:border-slate-600 mb-2 active:border-slate-600"
+        />
+
+        {/* offers section  */}
+        <p className="text-lg font-semibold mb-2">Offer</p>
+        <div className="flex">
+          {/* sale button  */}
           <button
             type="button"
             id="offer"
             value={true}
-            onClick={onChange}
-            className={`mr-3 px-7 mt-2 py-3 font-medium text-sm uppercase shadow-md rounded-3xl hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              !offer ? "bg-white text-black" : "bg-slate-600 text-white"
+            className={`mr-3 px-7 py-2 font-medium text-sm uppercase shadow-lg rounded-2xl hover:shadow-lg focus:shadow-lg active:shadow-xl transition duration-150 ease-in-out w-full ${
+              !offer ? "text-black bg-white" : "bg-blue-500 text-white"
             }`}
+            onClick={onChange}
           >
             yes
           </button>
+
+          {/* rent button  */}
           <button
             type="button"
             id="offer"
             value={false}
-            onClick={onChange}
-            className={`ml-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded-3xl hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              offer ? "bg-white text-black" : "bg-slate-600 text-white"
+            className={`ml-3 px-7 py-2 font-medium text-sm uppercase shadow-lg rounded-2xl hover:shadow-lg focus:shadow-lg active:shadow-xl transition duration-150 ease-in-out w-full ${
+              offer ? "text-black bg-white" : "bg-blue-500 text-white"
             }`}
+            onClick={onChange}
           >
             no
           </button>
         </div>
 
-        {/* regularPrice  */}
+        {/* regular price section  */}
         <div className="flex items-center mb-6">
           <div className="">
-            <p className="text-lg font-semibold">Regular price</p>
+            <p className="text-lg font-semibold mt-3">Regular price</p>
             <div className="flex w-full justify-center items-center space-x-6">
               <input
                 type="number"
                 id="regularPrice"
                 value={regularPrice}
                 onChange={onChange}
-                min="50"
-                max="400000000"
+                min={50}
                 required
-                className="w-full px-4 py-2 text-xl text-gray-700 bg-white border border-gray-300 rounded-3xl transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white focus:border-slate-600 text-center"
+                className="mt-2 rounded-xl text-center w-full px-4 -y-2 text-xl text-gray-700 bg-white border border-gray-300 transition duration-150 ease-in-out focus:text-gray-800 focus:bg-white focus:border-slate-600"
               />
               {type === "rent" && (
                 <div className="">
-                  <p className="text-md w-full whitespace-nowrap">Kshs / Month</p>
+                  <p className="text-md-full whitespace-nowrap">Kshs / Month</p>
                 </div>
               )}
             </div>
           </div>
         </div>
 
-        {/* discountedPrice  */}
+        {/* discounted price section  */}
         {offer && (
           <div className="flex items-center mb-6">
             <div className="">
-              <p className="text-lg font-semibold">Discounted price</p>
+              <p className="text-lg font-semibold mt-3">Discounted price</p>
               <div className="flex w-full justify-center items-center space-x-6">
                 <input
                   type="number"
                   id="discountedPrice"
                   value={discountedPrice}
                   onChange={onChange}
-                  min="50"
-                  max="400000000"
-                  required={offer}
-                  className="w-full px-4 py-2 text-xl text-gray-700 bg-white border border-gray-300 rounded-3xl transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white focus:border-slate-600 text-center"
+                  min={50}
+                  required={offer} // req if offer is true
+                  className="mt-2 rounded-xl text-center w-full px-4 -y-2 text-xl text-gray-700 bg-white border border-gray-300 transition duration-150 ease-in-out focus:text-gray-800 focus:bg-white focus:border-slate-600"
                 />
                 {type === "rent" && (
                   <div className="">
-                    <p className="text-md w-full whitespace-nowrap">Kshs / Month</p>
+                    <p className="text-md-full whitespace-nowrap">Kshs / Month</p>
                   </div>
                 )}
               </div>
@@ -353,31 +253,27 @@ export default function Addlisting() {
           </div>
         )}
 
-        {/* images  */}
-        {/* <div className="mb-6">
+        {/* images section  */}
+        <div className="mb-6">
           <p className="text-lg font-semibold">Images</p>
-          <p className="text-gray-600">The first image will be the cover (max 6)</p>
+          <p className="text-gray-500">The first image will be the cover image</p>
           <input
             type="file"
             id="images"
-            value={images}
             onChange={onChange}
-            accept=".jpg,.png,.jpeg"
-            multiple
             required
-            className="w-full px-3 py-1.5 text-gray-700 bg-white border border-gray-300 rounded-3xl transition duration-150 ease-in-out focus:bg-white focus:border-slate-600"
+            accept=".jpg, .png, .jpeg, .heif, .heic"
+            multiple
+            className="w-full px-3 py-2 text-gray-700 bg-white border border-gray-300 rounded-xl transition duration-150 ease-in-out focus:bg-white focus:border-slate-500"
           />
-        </div> */}
-
-        {/* add listing button  */}
+        </div>
         <button
           type="submit"
-          className="mb-6 w-full px-7 py-3 bg-blue-600 text-white font-medium text-sm uppercase rounded-3xl shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+          className="mb-3 w-full px-7 py-3 bg-blue-600 text-white font-medium text-sm uppercase rounded-xl shadow-lg hover:bg-blue-700 hover:shadow-xl focus:shadow-xl active:bg-blue-800 active:shadow-2xl transition duration-150 ease-in-out"
         >
-          Add Listing
+          Create Listing
         </button>
       </form>
     </main>
   );
 }
-// fix the maps api
