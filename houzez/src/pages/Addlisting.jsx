@@ -1,6 +1,13 @@
 import { useState } from "react";
+import Loading from "../components/Loading";
+import { toast } from "react-toastify";
 
 export default function Addlisting() {
+  // geolocation hook
+  const [geolacationEnabled, setGeolocationEnabled] = useState(true);
+
+  // loading hook
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     type: "rent",
     propertyName: "",
@@ -13,13 +20,80 @@ export default function Addlisting() {
     offer: false,
     regularPrice: 1,
     discountedPrice: 1,
+    latitude: 0,
+    longitude: 0,
+    images: {},
   });
-  const { type, propertyName, bedrooms, bathrooms, parking, furnished, address, description, offer, regularPrice, discountedPrice } = formData;
-  function onChange() {}
+
+  // destructuring the form data
+  const { type, propertyName, bedrooms, bathrooms, parking, furnished, address, description, offer, regularPrice, discountedPrice, latitude, longitude, images } = formData;
+
+  // on change tracking function
+  function onChange(e) {
+    let boolean = null; // used to change state in form data
+    if (e.target.value === "true") {
+      boolean = true;
+    }
+    if (e.target.value === "false") {
+      boolean = false;
+    }
+
+    // for files
+    if (e.target.files) {
+      setFormData((prevState) => ({
+        ...prevState,
+        images: e.target.files,
+      }));
+    }
+
+    // for text / boolean / number
+    if (!e.target.files) {
+      setFormData((prevState) => ({
+        ...prevState,
+        [e.target.id]: boolean ?? e.target.value, // if boolean is null consider the second one
+      }));
+    }
+  }
+
+  // on submit function
+  function onSubmit(e) {
+    // prevent reloading of the form
+    e.preventDefault();
+    setLoading(true);
+
+    // check conditions before submittting
+    // check the regular and discounted price
+    if (discountedPrice >= regularPrice) {
+      setLoading(false); // prevent loading
+      toast.error("Regular price cannot be less than discounted price");
+      return; // stop execution
+    }
+    // check images
+    if (images.length < 6) {
+      setLoading(false);
+      toast.error("Minimun six images allowed");
+      return;
+    }
+
+    // enabling the geo location
+    let geolocation = {};
+    let location;
+
+    if (geolacationEnabled) {
+      // if true, fetch data from googles api
+    }
+  }
+
+  // return the loading animation
+  if (loading) {
+    return <Loading />;
+  }
+
+  //  start of ui
   return (
     <main className="max-w-md px-2 mx-auto">
       <h1 className="text-3xl text-center mt-6 font-bold">Add new listing</h1>
-      <form>
+      <form onSubmit={onSubmit}>
         <p className="text-lg mt-6 font-semibold mb-2">Sell / Rent</p>
         <div className="flex mt-3">
           {/* sale button  */}
@@ -39,7 +113,7 @@ export default function Addlisting() {
           <button
             type="button"
             id="type"
-            value="sale"
+            value="rent"
             className={`ml-3 px-7 py-2 font-medium text-sm uppercase shadow-lg rounded-2xl hover:shadow-lg focus:shadow-lg active:shadow-xl transition duration-150 ease-in-out w-full ${
               type === "sale" ? "text-black bg-white" : "bg-blue-500 text-white"
             }`}
@@ -53,7 +127,7 @@ export default function Addlisting() {
         <p className="tect-lg mt-6 font-semibold mb-2">Name</p>
         <input
           type="text"
-          id="name"
+          id="propertyName"
           value={propertyName}
           onChange={onChange}
           placeholder="Enter property name"
@@ -66,7 +140,7 @@ export default function Addlisting() {
         {/* bedrooms and bathrooms buttons  */}
         <div className="flex space-x-6 mb-6">
           <div>
-            <p className="text-lg font-semibold mb-2">Beds</p>
+            <p className="text-lg font-semibold mb-2">Bedrooms</p>
             <input
               type="number"
               id="bedrooms"
@@ -74,7 +148,7 @@ export default function Addlisting() {
               onChange={onChange}
               min={1}
               required
-              className="px-4 py-2 text-lg text-gray-300 bg-white border border-gray-700 transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white focus:border-slate-600 text-center rounded-xl w-full"
+              className="px-4 py-2 text-lg text-gray-700 bg-white border border-gray-700 transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white focus:border-slate-600 text-center rounded-xl w-full"
             />
           </div>
           <div>
@@ -86,7 +160,7 @@ export default function Addlisting() {
               onChange={onChange}
               min={1}
               required
-              className="px-4 py-2 text-lg text-gray-300 bg-white border border-gray-700 transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white focus:border-slate-600 text-center rounded-xl w-full"
+              className="px-4 py-2 text-lg text-gray-700 bg-white border border-gray-700 transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white focus:border-slate-600 text-center rounded-xl w-full"
             />
           </div>
         </div>
@@ -162,6 +236,37 @@ export default function Addlisting() {
           placeholder="Enter property address"
           className="w-full px-4 py-2 text-xl text-gray-700 bg-white border border-gray-300 rounded-xl transition ease-in-out focus:text-gray-700 focus:bg-white focus:border-slate-600 mb-2 active:border-slate-600"
         />
+
+        {/* co-ordinates section for manual input */}
+        {!geolacationEnabled && (
+          <div className="flex space-x-6 mb-6">
+            <div className="">
+              {/* manual latitude input   */}
+              <p className="text-lg font-semibold">Latitude</p>
+              <input
+                type="number"
+                id="latitude"
+                value={latitude}
+                onChange={onChange}
+                required
+                className="rounded-xl text-center w-full px-4 py-2 text-lg text-gray-700 bg-white border border-gray-300 transition duration-150 ease-in-out focus:bg-white focus:text-gray-700 focus:border-slate-600"
+              />
+            </div>
+
+            {/* manual longitude input  */}
+            <div className="">
+              <p className="text-lg font-semibold">Longitude</p>
+              <input
+                type="number"
+                id="longitude"
+                value={longitude}
+                onChange={onChange}
+                required
+                className="rounded-xl text-center w-full px-4 py-2 text-lg text-gray-700 bg-white border border-gray-300 transition duration-150 ease-in-out focus:bg-white focus:text-gray-700 focus:border-slate-600"
+              />
+            </div>
+          </div>
+        )}
 
         {/* description section  */}
         <p className="text-lg font-semibold mb-2">Description</p>
