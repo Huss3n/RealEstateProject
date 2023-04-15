@@ -92,7 +92,7 @@ export default function Addlisting() {
       const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&components=country:KE&key=${process.env.REACT_APP_GEOCODE_API_KEY}`);
 
       const data = await response.json();
-      console.log("data:", data);
+      // console.log("data:", data);
       // console.log("results:", data.results);
       // console.log(data);
 
@@ -104,14 +104,14 @@ export default function Addlisting() {
       }
 
       geolocation.lat = data.results[0]?.geometry.location.lat ?? 0;
-      console.log(`geolat: ${geolocation.lat}`);
+      // console.log(`geolat: ${geolocation.lat}`);
       geolocation.lng = data.results[0]?.geometry.location.lng ?? 0;
-      console.log(`geolng: ${geolocation.lng}`);
+      // console.log(`geolng: ${geolocation.lng}`);
 
       // setting the location
-      location = data.results[0]?.formatted_address ?? undefined;
+      // location = data.results[0]?.formatted_address ?? undefined;
       // location = data.results[0]?.formatted_address; //this prints locs name
-      console.log(location);
+      // console.log(location);
       // console.log(typeof location);
 
       // if (location === undefined) {
@@ -176,6 +176,7 @@ export default function Addlisting() {
       imgUrls,
       geolocation,
       timestamp: serverTimestamp(),
+      userRef: auth.currentUser.uid,
     };
     delete formDataCopy.images;
     !formDataCopy.offer && delete formDataCopy.discountedPrice;
