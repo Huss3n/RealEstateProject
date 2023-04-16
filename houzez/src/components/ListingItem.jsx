@@ -40,11 +40,11 @@ export default function ListingItem({ listing, id, onEdit, onDelete }) {
           <div className="flex items-center mt-[10px] space-x-3">
             <div className="flex items-center space-x-1">
               <p className="font-bold text-xs">{listing.bedrooms > 1 ? `${listing.bedrooms} Beds` : "1 Bed"}</p>
-              <FaBed className="text-xs" />
+              <FaBed className="sm:text-xs text-xl" />
             </div>
             <div className="flex items-center space-x-1">
               <p className="font-bold text-xs">{listing.bathrooms > 1 ? `${listing.bathrooms} Baths` : "1 Bath"}</p>
-              <GiBathtub className="text-xs" />
+              <GiBathtub className="sm:text-xs text-xl" />
             </div>
           </div>
         </div>
