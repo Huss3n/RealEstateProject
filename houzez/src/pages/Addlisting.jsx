@@ -177,6 +177,7 @@ export default function Addlisting() {
       geolocation,
       timestamp: serverTimestamp(),
       userRef: auth.currentUser.uid,
+      realtorName: auth.currentUser.displayName,
     };
     delete formDataCopy.images;
     !formDataCopy.offer && delete formDataCopy.discountedPrice;
