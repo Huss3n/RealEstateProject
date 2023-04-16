@@ -12,6 +12,7 @@ import Header from "./components/header";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { PrivateRoute } from "./components/PrivateRoute";
+import Listing from "./pages/Listing";
 
 function App() {
   return (
@@ -38,6 +39,9 @@ function App() {
 
           {/* offers path  */}
           <Route path="/offers" element={<Offers />}></Route>
+
+          {/* listings path  */}
+          <Route path="/category/:categoryName/:listingId" element={<Listing />}></Route>
 
           {/* add listing protected path  */}
           <Route path="/Add-Listing" element={<PrivateRoute />}>
