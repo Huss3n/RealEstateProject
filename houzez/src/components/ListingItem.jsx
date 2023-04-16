@@ -4,7 +4,9 @@ import { Link } from "react-router-dom";
 import { MdLocationPin } from "react-icons/md";
 import { FaBed } from "react-icons/fa";
 import { GiBathtub } from "react-icons/gi";
-export default function ListingItem({ listing, id }) {
+import { FaTrash } from "react-icons/fa";
+import { MdEdit } from "react-icons/md";
+export default function ListingItem({ listing, id, onEdit, onDelete }) {
   return (
     <li className="relative bg-white flex flex-col justify-between items-center shadow-lg hover:shadow-xl rounded-lg overflow-hidden transition duration-150 ease-in-out">
       <Link to={`/category/${listing.type}/${id}`}>
@@ -35,6 +37,11 @@ export default function ListingItem({ listing, id }) {
           </div>
         </div>
       </Link>
+      {/* delete listing function  */}
+      {onDelete && <FaTrash className="absolute bottom-2 right-2 h-4 cursor-pointer text-red-600" onClick={() => onDelete(listing.id)} />}
+
+      {/* edit listing function  */}
+      {onEdit && <MdEdit className="absolute bottom-2 right-7 h-4 cursor-pointer" onClick={() => onEdit(listing.id)} />}
     </li>
   );
 }
