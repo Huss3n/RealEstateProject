@@ -1,12 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Loading from "../components/Loading";
 import { toast } from "react-toastify";
 import { getStorage, uploadBytesResumable, ref, getDownloadURL } from "firebase/storage";
-import { collection, serverTimestamp, addDoc } from "firebase/firestore";
+import { collection, serverTimestamp, addDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { v4 as uuidv4 } from "uuid";
 import { db } from "../firebase";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function Addlisting() {
   // get auth
@@ -19,6 +19,11 @@ export default function Addlisting() {
 
   // loading hook
   const [loading, setLoading] = useState(false);
+
+  // listings hook
+  const [listing, setListing] = useState(null);
+
+  // form hook
   const [formData, setFormData] = useState({
     type: "rent",
     propertyName: "",
@@ -37,6 +42,31 @@ export default function Addlisting() {
   // destructuring the form data
   const { type, propertyName, bedrooms, bathrooms, parking, furnished, address, description, offer, regularPrice, discountedPrice, images } = formData;
 
+  const params = useParams();
+
+  useEffect(() => {
+    if (listing && listing.userRef !== auth.currentUser.uid) {
+      toast.error("You can't edit this listing");
+      navigate("/");
+    }
+  }, [auth.currentUser.uid, listing, navigate]);
+
+  useEffect(() => {
+    setLoading(true);
+    async function fetchListing() {
+      const docRef = doc(db, "listings", params.listingId);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        setListing(docSnap.data());
+        setFormData({ ...docSnap.data() });
+        setLoading(false);
+      } else {
+        navigate("/");
+        toast.error("Listing does not exist");
+      }
+    }
+    fetchListing();
+  }, [navigate, params.listingId]);
   // on change tracking function
   function onChange(e) {
     let boolean = null; // used to change state in form data
@@ -92,12 +122,12 @@ export default function Addlisting() {
       const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&components=country:KE&key=${process.env.REACT_APP_GEOCODE_API_KEY}`);
 
       const data = await response.json();
-      console.log("data:", data);
+      // console.log("data:", data);
       // console.log("results:", data.results);
       // console.log(data);
 
       // check for valid user address
-      if (data.status !== "OK" || data.results.length === 0) {
+      if (data.status !== "OK" || data.results.length === 0 || data.results[0].partial_match === true) {
         setLoading(false);
         toast.error("Please enter a valid address");
         return;
@@ -181,13 +211,12 @@ export default function Addlisting() {
     };
     delete formDataCopy.images;
     !formDataCopy.offer && delete formDataCopy.discountedPrice;
-    const docRef = await addDoc(collection(db, "listings"), formDataCopy);
-    delete formDataCopy.latitude;
-    delete formDataCopy.longitude;
-    navigate(`/category/${formDataCopy.type}/${docRef.id}`);
-    // Navigate()
+    const docRef = doc(db, "listings", params.listingId);
+    await updateDoc(docRef, formDataCopy);
     setLoading(false);
-    toast.success("New listing created");
+    toast.success("Listing details updated");
+    // Navigate()
+    navigate(`/category/${formDataCopy.type}/${docRef.id}`);
   }
 
   // return the loading animation
@@ -198,7 +227,7 @@ export default function Addlisting() {
   //  start of ui
   return (
     <main className="max-w-md px-2 mx-auto">
-      <h1 className="text-3xl text-center mt-6 font-bold">Add new listing</h1>
+      <h1 className="text-3xl text-center mt-6 font-bold">Edit listing</h1>
       <form onSubmit={onSubmit}>
         <p className="text-lg mt-6 font-semibold mb-2">Sell / Rent</p>
         <div className="flex mt-3">
@@ -451,7 +480,7 @@ export default function Addlisting() {
           type="submit"
           className="mb-3 w-full px-7 py-3 bg-blue-600 text-white font-medium text-sm uppercase rounded-xl shadow-lg hover:bg-blue-700 hover:shadow-xl focus:shadow-xl active:bg-blue-800 active:shadow-2xl transition duration-150 ease-in-out"
         >
-          Create Listing
+          Edit Listing
         </button>
       </form>
     </main>
