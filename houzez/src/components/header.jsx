@@ -72,7 +72,7 @@ export default function Header() {
             className={`cursor-pointer py-3 text-sm font-semibold text-gray-500 border-b-2 ${getPath("/") ? "border-b-red-500 text-black" : "border-b-transparent"}`}
             onClick={() => navigate("/")}
           >
-            Home
+            Contacts
           </li>
         </ul>
       </header>
