@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import MiniNav from "../components/MiniNav/MiniNav";
+import MiniNav from "../components/MiniNav";
 
 // TODO send mail to the mail address
 
