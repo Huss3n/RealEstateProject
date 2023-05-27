@@ -16,6 +16,7 @@ import Listing from "./pages/Listing";
 import AllListings from "./pages/AllListings";
 import { ChakraProvider } from "@chakra-ui/react";
 import About from "./pages/About";
+import Contact from "./pages/Contact";
 
 function App() {
   return (
