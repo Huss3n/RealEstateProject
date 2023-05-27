@@ -48,6 +48,12 @@ export default function Header() {
             Home
           </li>
           <li
+            className={`cursor-pointer py-3 text-sm font-semibold text-gray-500 border-b-2 ${getPath("/AllListings") ? "border-b-red-500 text-black" : "border-b-transparent"}`}
+            onClick={() => navigate("/AllListings")}
+          >
+            Listings
+          </li>
+          <li
             className={`cursor-pointer py-3 text-sm font-semibold text-gray-500 border-b-2 ${getPath("/offers") ? "border-b-red-500 text-black" : "border-b-transparent"}`}
             onClick={() => navigate("/offers")}
           >

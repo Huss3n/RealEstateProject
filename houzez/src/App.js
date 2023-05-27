@@ -13,6 +13,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { PrivateRoute } from "./components/PrivateRoute";
 import Listing from "./pages/Listing";
+import AllListings from "./pages/AllListings";
 
 function App() {
   return (
@@ -22,6 +23,9 @@ function App() {
         <Routes>
           {/* home path  */}
           <Route path="/" element={<Home />}></Route>
+
+          {/* All listings path  */}
+          <Route path="/AllListings" element={<AllListings />}></Route>
 
           {/* profile path  */}
           <Route path="/profile" element={<PrivateRoute />}>
