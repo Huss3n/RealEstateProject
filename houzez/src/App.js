@@ -34,6 +34,9 @@ function App() {
             {/* about path  */}
             <Route path="/About" element={<About />}></Route>
 
+            {/* contacts page  */}
+            <Route path="/Contact" element={<Contact />}></Route>
+
             {/* profile path  */}
             <Route path="/profile" element={<PrivateRoute />}>
               <Route path="/profile" element={<Profile />}></Route>
