@@ -14,62 +14,69 @@ import "react-toastify/dist/ReactToastify.css";
 import { PrivateRoute } from "./components/PrivateRoute";
 import Listing from "./pages/Listing";
 import AllListings from "./pages/AllListings";
+import { ChakraProvider } from "@chakra-ui/react";
+import About from "./pages/About";
 
 function App() {
   return (
     <>
-      <Router>
-        <Header />
-        <Routes>
-          {/* home path  */}
-          <Route path="/" element={<Home />}></Route>
+      <ChakraProvider>
+        <Router>
+          <Header />
+          <Routes>
+            {/* home path  */}
+            <Route path="/" element={<Home />}></Route>
 
-          {/* All listings path  */}
-          <Route path="/AllListings" element={<AllListings />}></Route>
+            {/* All listings path  */}
+            <Route path="/AllListings" element={<AllListings />}></Route>
 
-          {/* profile path  */}
-          <Route path="/profile" element={<PrivateRoute />}>
-            <Route path="/profile" element={<Profile />}></Route>
-          </Route>
+            {/* about path  */}
+            <Route path="/About" element={<About />}></Route>
 
-          {/* login path  */}
-          <Route path="/Login" element={<Login />}></Route>
+            {/* profile path  */}
+            <Route path="/profile" element={<PrivateRoute />}>
+              <Route path="/profile" element={<Profile />}></Route>
+            </Route>
 
-          {/* regiser path  */}
-          <Route path="/register" element={<Register />}></Route>
+            {/* login path  */}
+            <Route path="/Login" element={<Login />}></Route>
 
-          {/* forgot password path  */}
-          <Route path="/forgotPassword" element={<ForgotPassword />}></Route>
+            {/* regiser path  */}
+            <Route path="/register" element={<Register />}></Route>
 
-          {/* offers path  */}
-          <Route path="/offers" element={<Offers />}></Route>
+            {/* forgot password path  */}
+            <Route path="/forgotPassword" element={<ForgotPassword />}></Route>
 
-          {/* listings path  */}
-          <Route path="/category/:categoryName/:listingId" element={<Listing />}></Route>
+            {/* offers path  */}
+            <Route path="/offers" element={<Offers />}></Route>
 
-          {/* add listing protected path  */}
-          <Route path="/Add-Listing" element={<PrivateRoute />}>
-            <Route path="/Add-Listing" element={<Addlisting />}></Route>
-          </Route>
+            {/* listings path  */}
+            <Route path="/category/:categoryName/:listingId" element={<Listing />}></Route>
 
-          {/* add a protected route to edit listing page  */}
-          <Route path="/edit-listing" element={<PrivateRoute />}>
-            <Route path="/edit-listing/:listingId" element={<EditListing />}></Route>
-          </Route>
-        </Routes>
-      </Router>
-      <ToastContainer
-        position="bottom-center"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
+            {/* add listing protected path  */}
+            <Route path="/Add-Listing" element={<PrivateRoute />}>
+              <Route path="/Add-Listing" element={<Addlisting />}></Route>
+            </Route>
+
+            {/* add a protected route to edit listing page  */}
+            <Route path="/edit-listing" element={<PrivateRoute />}>
+              <Route path="/edit-listing/:listingId" element={<EditListing />}></Route>
+            </Route>
+          </Routes>
+        </Router>
+        <ToastContainer
+          position="bottom-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
+      </ChakraProvider>
     </>
   );
 }
