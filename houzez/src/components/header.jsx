@@ -36,7 +36,7 @@ export default function Header() {
         <div className="flex items-center">
           <img src={require("./logo/logo.png")} alt="logo" className="h-8 cursor-pointer flex-shrink-0" onClick={() => navigate("/")} />
           <span className="ml-2 mt-3 text-3xl font-bold text-red-400 cursor-pointer" onClick={() => navigate("/")} style={{ fontFamily: "Zeyada, cursive" }}>
-            HouzeHive
+            HouseHive
           </span>
         </div>
 
@@ -69,8 +69,8 @@ export default function Header() {
           </li>
 
           <li
-            className={`cursor-pointer py-3 text-sm font-semibold text-gray-500 border-b-2 ${getPath("/") ? "border-b-red-500 text-black" : "border-b-transparent"}`}
-            onClick={() => navigate("/")}
+            className={`cursor-pointer py-3 text-sm font-semibold text-gray-500 border-b-2 ${getPath("/Contacts") ? "border-b-red-500 text-black" : "border-b-transparent"}`}
+            onClick={() => navigate("/Contacts")}
           >
             Contacts
           </li>

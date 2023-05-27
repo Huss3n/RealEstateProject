@@ -12,14 +12,14 @@ export default function Contact() {
   const contactMethods = {
     contact: "testmail@gmail.com",
     phone: "+1 (555) 000-000",
-    location: "Kathmandu, Nepal",
+    location: "JKUAT Towers, Nairobi",
   };
 
   return (
     <>
       {/* ====== Contact Section Start */}
       <section className="relative z-10 overflow-hidden bg-white max-w-[1280px] w-[90%] mx-auto lg:p-6">
-        <div>
+        <div className="pt-4">
           <MiniNav />
         </div>
         <div className="container mx-auto">
@@ -74,6 +74,7 @@ export default function Contact() {
                   <div className="mb-6">
                     <input
                       type="text"
+                      required
                       placeholder="Your Name"
                       className="text-body-color border-[f0f0f0] focus:border-primary w-full rounded border py-3 px-[14px] text-base outline-none focus-visible:shadow-none"
                     />
@@ -81,6 +82,7 @@ export default function Contact() {
                   <div className="mb-6">
                     <input
                       type="email"
+                      required
                       placeholder="Your Email"
                       className="text-body-color border-[f0f0f0] focus:border-primary w-full rounded border py-3 px-[14px] text-base outline-none focus-visible:shadow-none"
                     />
@@ -96,12 +98,13 @@ export default function Contact() {
                     <textarea
                       rows={6}
                       placeholder="Your Message"
+                      required
                       className="text-body-color border-[f0f0f0] focus:border-primary w-full resize-none rounded border py-3 px-[14px] text-base outline-none focus-visible:shadow-none"
                       defaultValue={""}
                     />
                   </div>
                   <div>
-                    <button type="submit" className="bg-primary border-primary w-full rounded border p-3 text-dark transition hover:bg-opacity-90">
+                    <button type="submit" className="bg-blue-500 border-primary w-full rounded border p-3 text-dark transition hover:bg-opacity-90">
                       Send Message
                     </button>
                   </div>
