@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import MiniNav from "../components/MiniNav";
 import { FaUsers, FaHeadset, FaDesktop, FaCertificate, FaShoppingCart, FaHandshake, FaKey } from "react-icons/fa";
 import Footer from "../components/Footer";
+import background from "../components/background/blurry-gradient-haikei.svg";
 
 const About = () => {
   useEffect(() => {
@@ -11,7 +12,7 @@ const About = () => {
   }, []);
 
   return (
-    <div>
+    <div className="bg-cover bg-center" style={{ backgroundImage: `url(${background})` }}>
       <div className="mx-auto max-w-[1280px] w-[90%] lg:p-6">
         <div className="pt-4">
           <MiniNav />

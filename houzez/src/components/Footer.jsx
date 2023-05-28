@@ -72,7 +72,7 @@ const Footer = () => {
               <ul className="mt-2 space-y-2">
                 <li>JKUAT Towers,</li>
                 <li>Nairobi,</li>
-                <li>Kenya.</li>a
+                <li>Kenya.</li>
               </ul>
             </div>
           </div>

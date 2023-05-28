@@ -22,9 +22,9 @@ const MiniNav = () => {
           <div>
             <ol className="flex items-center whitespace-nowrap min-w-0" aria-label="Breadcrumb">
               <li className="text-sm">
-                <Link className="flex items-center text-gray-500 hover:text-cyan-600" to={"/"}>
+                <Link className="flex items-center text-white hover:text-cyan-600" to={"/"}>
                   Home
-                  <AiOutlineRight className="flex-shrink-0 mx-3 h-2.5 w-2.5 text-gray-600 dark:text-gray-600" />
+                  <AiOutlineRight className="flex-shrink-0 mx-3 h-2.5 w-2.5 text-white dark:text-white" />
                 </Link>
               </li>
               {pagelocation.map((page, index) => {
@@ -32,7 +32,7 @@ const MiniNav = () => {
                   page = page.charAt(0).toUpperCase() + page.slice(1);
                   return (
                     <li className="text-sm" key={index}>
-                      <Link className="flex items-center text-gray-500 hover:text-cyan-600" to={`/${page}`}>
+                      <Link className="flex items-center text-white hover:text-cyan-600" to={`/${page}`}>
                         {page}
                         {index !== pagelocation.length - 1 && <AiOutlineRight className="flex-shrink-0 mx-3 h-2.5 w-2.5 text-gray-600 dark:text-gray-600" />}
                       </Link>

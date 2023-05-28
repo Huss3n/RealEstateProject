@@ -6,6 +6,7 @@ import HeroCard from "../components/card/heroCard";
 import Stats from "../components/Stats";
 import FeaturedProperty from "../components/Featured";
 import Newsletter from "../components/Newsletter";
+import Footer from "../components/Footer";
 
 export default function CallToActionWithVideo() {
   return (
@@ -105,6 +106,7 @@ export default function CallToActionWithVideo() {
         <FeaturedProperty />
       </div>{" "}
       <Newsletter />
+      <Footer />
     </>
   );
 }

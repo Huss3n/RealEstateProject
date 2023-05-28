@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import ListingItem from "../components/ListingItem";
-import Slider from "../components/Slider";
 import { db } from "../firebase";
 import Footer from "../components/Footer";
 
@@ -86,7 +85,7 @@ export default function AllListigs() {
   return (
     <div>
       {/* <Slider /> */}
-      <div className="max-w-6xl mx-auto pt-4 space-y-6">
+      <div className="max-w-8xl mx-auto pt-4 space-y-6 px-6">
         {offerListings && offerListings.length > 0 && (
           <div className="m-2 mb-6">
             <h2 className="px-3 text-2xl mt-6 font-semibold">Recent offers</h2>

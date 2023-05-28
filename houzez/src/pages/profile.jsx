@@ -116,9 +116,9 @@ export default function Profile() {
                   {editDetails ? "Save" : "🖍️"}
                 </span>
               </p>
-              <p className="pl-28 text-blue-400 cursor-pointer hover:text-red-400 transition ease-out duration-200" onClick={signout}>
+              <button className="px-4 py-2 text-white bg-red-500 rounded-full text-sm hover:bg-red-600 transition duration-200" onClick={signout}>
                 Sign out
-              </p>
+              </button>
             </div>
           </form>
           <button
@@ -132,7 +132,7 @@ export default function Profile() {
           </button>
         </div>
       </section>
-      <div className="max-w-6xl px-3 mt-6 mx-auto">
+      <div className="max-w-8xl px-4 mt-6 mx-auto">
         {!loading && listings.length > 0 && (
           <>
             <h2 className="text-2xl text-center font-semibold mb-6">My Listings</h2>

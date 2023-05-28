@@ -59,7 +59,8 @@ export default function Offers() {
 
   return (
     <>
-      <div className="max-w-6xl mx-auto px-3">
+      {/* changed the max-w-6xl to 8xl  */}
+      <div className="max-w-8xl mx-auto px-6">
         <h1 className="text-3xl mt-6 font-bold mb-6 px-2">Offers</h1>
         {loading ? (
           <Loading />
