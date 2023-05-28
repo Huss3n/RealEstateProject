@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import MiniNav from "../components/MiniNav";
-
 // TODO send mail to the mail address
+import Footer from "../components/Footer";
 
 export default function Contact() {
   useEffect(() => {
@@ -240,6 +240,8 @@ export default function Contact() {
         </div>
       </section>
       {/* ====== Contact Section End */}
+
+      <Footer />
     </>
   );
 }

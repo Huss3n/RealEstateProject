@@ -5,7 +5,6 @@ import Slider from "../components/Slider";
 import HeroCard from "../components/card/heroCard";
 import Stats from "../components/Stats";
 import FeaturedProperty from "../components/Featured";
-import Footer from "../components/Footer";
 import Newsletter from "../components/Newsletter";
 
 export default function CallToActionWithVideo() {
@@ -106,7 +105,6 @@ export default function CallToActionWithVideo() {
         <FeaturedProperty />
       </div>{" "}
       <Newsletter />
-      <Footer />
     </>
   );
 }

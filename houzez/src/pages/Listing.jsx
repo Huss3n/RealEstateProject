@@ -11,6 +11,7 @@ import { FaShare, FaMapMarkerAlt, FaBed, FaBath, FaParking, FaChair } from "reac
 import { getAuth } from "firebase/auth";
 import Contact from "../components/Contact";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import Footer from "../components/Footer";
 
 export default function Listing() {
   const auth = getAuth();
@@ -128,6 +129,7 @@ export default function Listing() {
           </MapContainer>
         </div>
       </div>
+      <Footer />
     </main>
   );
 }

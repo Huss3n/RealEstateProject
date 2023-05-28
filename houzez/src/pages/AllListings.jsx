@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import ListingItem from "../components/ListingItem";
 import Slider from "../components/Slider";
 import { db } from "../firebase";
+import Footer from "../components/Footer";
 
 export default function AllListigs() {
   // Offers
@@ -126,6 +127,7 @@ export default function AllListigs() {
           </div>
         )}
       </div>
+      <Footer />
     </div>
   );
 }

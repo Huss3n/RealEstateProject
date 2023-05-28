@@ -1,72 +1,90 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-const Footer = ({ setAuth, isAuthenticated }) => {
+const Footer = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className="mt-10 bg-cyan-600 text-black text-lg flex flex-wrap">
-      <hr className="border-gray-200 shadow-lg" />
-      <div className="mb-2 flex flex-col max-w-[1280px] mx-auto px-6 lg:px-0 xl:px-0 gap-3 bg-cyan-600">
-        <footer className="footer py-4 text-white mt-10 ">
-          <div className="md:place-self-center md:justify-self-center ">
-            <div className="grid grid-flow-col gap-4">
-              <div className="flex flex-col mb-10 md:mb-5 max-w-lg items-start px-4 pl-0">
-                <div className="flex items-center">
-                  <a href="/" className="mb-10 md:mb-5 flex items-center space-x-2">
-                    <img src={require("./logo/logo.png")} className="h-7 cursor-pointer flex-shrink-0" alt="HouseHive Logo" id="logo" />
-                  </a>
-                  <label htmlFor="logo">House Hive</label>
-                </div>
-                <div className="text-white">Find comfort in the house with us, want to find a home? we are ready to help you wholeheartedly based on what you need.</div>
-              </div>
+    <div className="mt-10 bg-cyan-600 text-black text-lg">
+      <hr className="border-red-500 shadow-lg" />
+      <div className="container mx-auto px-6 lg:px-0 xl:px-0">
+        <footer className="py-2 text-white mt-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div>
+              <a href="/" className="flex items-center space-x-2">
+                <img src={require("./logo/logo.png")} className="h-7 cursor-pointer flex-shrink-0" alt="HouseHive Logo" />
+                <span className="ml-2 text-3xl font-bold text-red-400 cursor-pointer" onClick={() => navigate("/")} style={{ fontFamily: "Zeyada, cursive" }}>
+                  HouseHive
+                </span>
+              </a>
+              <p className="text-white mt-2">Find comfort in the house with us. Looking for a home? We are ready to help you wholeheartedly based on your needs.</p>
+            </div>
 
-              <div className="flex items-center justify-center space-y-4">
-                <div className="text-white flex flex-col pl-0">
-                  <span className="footer-title pl-0">Services</span>
-                  {/* if authenticated then goto /sell else goto /login */}
-                  {isAuthenticated ? (
-                    <a className="link link-hover" href="/sell">
-                      Sell
-                    </a>
-                  ) : (
-                    <a className="btn-disabled text-gray-400">Sell</a>
-                  )}
+            <div>
+              <span className="footer-title">Services</span>
+              <ul className="mt-2 space-y-2">
+                <li>
+                  {/* only if authenticated  */}
+                  <a className="link link-hover" href="/sell">
+                    Sell
+                  </a>
+                </li>
+
+                {/* only if authenticated  */}
+                <li>
                   <a className="link link-hover" href="/rent">
                     Rent
                   </a>
-                  <a className="link link-hover" href="/buy">
+                </li>
+                <li>
+                  <a className="link link-hover" href="/AllListings">
                     Buy
                   </a>
-                </div>
+                </li>
+              </ul>
+            </div>
 
-                {/* Legals */}
-                <div className="text-white flex flex-col space-x-4 items-center">
+            <div>
+              <span className="footer-title">Legals</span>
+              <ul className="mt-2 space-y-2">
+                <li>
                   <a className="link link-hover" href="terms">
                     Terms of use
                   </a>
+                </li>
+                <li>
                   <a className="link link-hover" href="privacy-policy">
                     Privacy policy
                   </a>
+                </li>
+                <li>
                   <a className="link link-hover" href="cookie">
                     Cookie policy
                   </a>
-                </div>
-              </div>
+                </li>
+              </ul>
+            </div>
 
-              <div className="flex flex-col items-end text-white">
-                <span className="footer-title text-lg underline">Office</span>
-                <p className="text-white">JKUAT Towers</p>
-                <p className="text-white">Nairobi, Kenya</p>
-              </div>
+            {/* office */}
+
+            <div className="hidden md:block">
+              <span className="footer-title">Office</span>
+              <ul className="mt-2 space-y-2">
+                <li>JKUAT Towers,</li>
+                <li>Nairobi,</li>
+                <li>Kenya.</li>a
+              </ul>
             </div>
           </div>
         </footer>
-        <footer className="footer bg-cyan-600 text-white text-lg">
-          <hr className=" border-red-500" />
-          <div className="flex flex-col items-center justify-between">
-            <span className="text-lg text-white sm:text-center dark:text-white">
+        <footer className="bg-cyan-600 text-white text-lg">
+          <hr className="border-red-500" />
+          <div className="flex items-center justify-center py-4">
+            <span className="text-lg text-white">
               © {new Date().getFullYear()}{" "}
               <a href="/" className="hover:underline">
                 HouseHive
-              </a>
+              </a>{" "}
               ™. All Rights Reserved.
             </span>
           </div>

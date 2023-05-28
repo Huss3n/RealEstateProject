@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 // import Featured from "../Layouts/About/Featured";
 import MiniNav from "../components/MiniNav";
 import { FaUsers, FaHeadset, FaDesktop, FaCertificate, FaShoppingCart, FaHandshake, FaKey } from "react-icons/fa";
+import Footer from "../components/Footer";
 
 const About = () => {
   useEffect(() => {
@@ -181,6 +182,7 @@ const About = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
