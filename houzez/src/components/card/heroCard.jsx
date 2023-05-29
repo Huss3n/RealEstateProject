@@ -4,35 +4,79 @@ import { MdOutlineLocationOn, MdOutlineAttachMoney } from "react-icons/md";
 // import { TbHomeSearch } from "react-icons/tb";
 // import axios from "axios";
 // import { SERVER_URL } from "../../Config";
+// import { db } from "../firebase";
+// import { collection, getDocs, limit, orderBy, query, startAfter, where } from "firebase/firestore";
+// import Loading from "../components/Loading";
 
 const HeroCard = () => {
-  const [data, setData] = useState({
-    location: "",
-    propertyType: "House",
-    listingType: "Rent",
-    minPrice: "",
-    maxPrice: "",
-  });
-
-  const [searchData, setSearchData] = useState([]);
-
-  const searchProperty = async () => {
-    try {
-      //   const response = await axios.get(`${SERVER_URL}/api/properties/search}`, { params: data });
-      //   setSearchData(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const [data, setData] = useState({
+  //   location: "",
+  //   propertyType: "House",
+  //   listingType: "Rent",
+  //   minPrice: "",
+  //   maxPrice: "",
+  // });
+  // const searchProperty = async () => {
+  //   try {
+  //     //   const response = await
+  //     //   setSearchData(response.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   // console.log(searchData);
 
   // console.log(data);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setData((prevData) => ({ ...prevData, [name]: value }));
-  };
+  // async function fetchListings() {
+  //   try {
+  //     const listingRef = collection(db, "listings");
+  //     const q = query(listingRef, where("offer", "==", true), orderBy("timestamp", "desc"), limit(8));
+  //     const querySnap = await getDocs(q);
+  //     const lastVisible = querySnap.docs[querySnap.docs.length - 1];
+  //     setLastFetchListing(lastVisible);
+  //     const listings = [];
+  //     querySnap.forEach((doc) => {
+  //       return listings.push({
+  //         id: doc.id,
+  //         data: doc.data(),
+  //       });
+  //     });
+  //     setListings(listings);
+  //     setLoading(false);
+  //   } catch (error) {
+  //     toast.error("Could not fetch listing");
+  //   }
+  // }
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setData((prevData) => ({ ...prevData, [name]: value }));
+  //   console.log(name);
+  // };
+
+  const [userInput, setUserInput] = useState({
+    location: "",
+    type: "Rent",
+    rooms: 1,
+    baths: 1,
+  });
+
+  const { location, type, rooms, baths } = userInput;
+
+  function handleChange(e) {
+    setUserInput((prevData) => {
+      const { name, value } = e.target;
+      return {
+        ...prevData,
+        [name]: value,
+      };
+    });
+  }
+
+  function searchProperty() {
+    console.log(userInput);
+  }
 
   return (
     <div className="">
@@ -53,6 +97,7 @@ const HeroCard = () => {
                     onChange={handleChange}
                     id="location"
                     name="location"
+                    value={location}
                   />
                 </div>
               </div>
@@ -66,43 +111,46 @@ const HeroCard = () => {
                   id="hs-select-label"
                   onChange={handleChange}
                   className="w-full border-none text-gray-500 bg-white rounded-lg p-1  placeholder:text-gray-400 text-xl font-medium py focus:outline-none"
-                  name="propertyType"
+                  name="type"
+                  value={type}
                 >
-                  <option>House</option>
-                  <option>Apartment</option>
+                  <option>Rent</option>
+                  <option>Buy</option>
                 </select>
               </div>
 
               <div className="flex flex-col">
                 <div className="flex gap-3 items-center">
-                  <MdOutlineAttachMoney className="text-3xl text-green-500" />
-                  <label className="text-black text-xl font-bold">Min Price</label>
+                  {/* <MdOutlineAttachMoney className="text-3xl text-green-500" /> */}
+                  <label className="text-black text-xl font-bold">Bedrooms</label>
                 </div>
                 <div>
                   <input
                     type="number"
-                    placeholder="Enter Min Price"
+                    placeholder="Bedrooms"
                     className="w-full border-none text-gray-500 bg-white rounded-lg p-2  placeholder:text-gray-400 text-lg font-medium py focus:outline-none"
                     onChange={handleChange}
-                    id="minPrice"
-                    name="minPrice"
+                    id="bedrooms"
+                    name="rooms"
+                    value={rooms}
                   />
                 </div>
               </div>
 
               <div className="flex flex-col">
                 <div className="flex gap-3 items-center">
-                  <MdOutlineAttachMoney className="text-3xl text-green-500" />
-                  <label className="text-black text-xl font-bold">Max Price</label>
+                  {/* <MdOutlineAttachMoney className="text-3xl text-green-500" /> */}
+                  <label className="text-black text-xl font-bold">Bathrooms</label>
                 </div>
                 <div>
                   <input
                     type="number"
-                    placeholder="Enter max Price"
+                    placeholder="Bathrooms"
                     className="w-full border-none text-gray-500 bg-white rounded-lg p-2  placeholder:text-gray-400 text-lg font-medium py focus:outline-none"
                     onChange={handleChange}
-                    id="maxPrice"
-                    name="maxPrice"
+                    id="bathrooms"
+                    name="baths"
+                    value={baths}
                   />
                 </div>
               </div>
@@ -110,9 +158,9 @@ const HeroCard = () => {
           </div>
 
           <div className="md:absolute md:right-[5%] flex items-center justify-center -translate-y-1/2">
-            <Link to={`/search?location=${data.location}&propertyType=${data.propertyType}`} state={data} onClick={searchProperty}>
-              <button className="bg-cyan-600 px-10 py-4 text-white text-xl font-bold rounded-lg hover:bg-cyan-700">Search</button>
-            </Link>
+            <button className="bg-cyan-600 px-10 py-4 text-white text-xl font-bold rounded-lg hover:bg-cyan-700" onClick={searchProperty}>
+              Search
+            </button>
           </div>
         </div>
       </div>

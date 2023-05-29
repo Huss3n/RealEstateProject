@@ -72,7 +72,7 @@ export default function FeaturedProperty() {
                 <p className="text-center lg:text-left text-gray-400">
                   We’re creating a seamless online experience – from shopping on the largest rental network, to applying, to paying rent.
                 </p>
-                <a href="#" className="btn btn-rent bg-blue-600">
+                <a href="/AllListings#rentalProperties" className="btn btn-rent bg-blue-600">
                   See Rentals
                 </a>
               </div>
@@ -87,7 +87,7 @@ export default function FeaturedProperty() {
                 <p className="text-center lg:text-left text-gray-400">
                   Find your place with an immersive photo expirience and the most listings, including things you won't find elsewhere
                 </p>
-                <a href="#" className="btn btn-buy bg-blue-600">
+                <a href="/AllListings" className="btn btn-buy bg-blue-600">
                   See Options
                 </a>
               </div>

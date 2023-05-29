@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import ListingItem from "../components/ListingItem";
 import { db } from "../firebase";
 import Footer from "../components/Footer";
+import { useLocation } from "react-router-dom";
 
 export default function AllListigs() {
   // Offers
@@ -82,6 +83,19 @@ export default function AllListigs() {
     }
     fetchListings();
   }, []);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash === "#rentalHouses") {
+      setTimeout(() => {
+        const rentalHousesElement = document.getElementById("rentalHouses");
+        if (rentalHousesElement) {
+          rentalHousesElement.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 4000);
+    }
+  }, [location]);
   return (
     <div>
       {/* <Slider /> */}
@@ -100,7 +114,7 @@ export default function AllListigs() {
           </div>
         )}
         {rentListings && rentListings.length > 0 && (
-          <div className="m-2 mb-6">
+          <div className="m-2 mb-6" id="rentalHouses">
             <h2 className="px-3 text-2xl mt-6 font-semibold">Places for rent</h2>
             <Link to="/category/rent">
               <p className="px-3 text-sm text-blue-600 hover:text-blue-800 transition duration-150 ease-in-out">Show more places for rent</p>
