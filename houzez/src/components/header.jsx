@@ -46,7 +46,7 @@ export default function Header() {
   };
 
   return (
-    <div className="bg-white border-b shadow-xl sticky top-0 z-40 px-1">
+    <div className="bg-cyan-700 border-b shadow-xl sticky top-0 z-40 px-1">
       <header className="flex justify-between items-center px-2 max-w-7xl mx-auto">
         <div className="flex items-center">
           <img
@@ -72,7 +72,7 @@ export default function Header() {
 
         {isMobile ? (
           <div className="flex items-center">
-            <button className="p-2 rounded-md text-gray-600 hover:bg-gray-200 focus:outline-none focus:bg-gray-200" onClick={toggleMenu}>
+            <button className="p-2 rounded-md text-black hover:bg-cyan-700 focus:outline-none focus:bg-cyan-700" onClick={toggleMenu}>
               <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
               </svg>
@@ -81,7 +81,7 @@ export default function Header() {
         ) : (
           <ul className="flex space-x-10 my-5">
             <li
-              className={`cursor-pointer py-3 text-sm font-semibold ${getPath("/") ? "border-b border-red-500 text-black" : "border-b-transparent text-gray-500"}`}
+              className={`cursor-pointer py-3 text-sm font-semibold ${getPath("/") ? "border-b border-red-500 text-black" : "border-b-transparent text-white"}`}
               onClick={() => {
                 closeMenu();
                 navigate("/");
@@ -90,7 +90,7 @@ export default function Header() {
               Home
             </li>
             <li
-              className={`cursor-pointer py-3 text-sm font-semibold ${getPath("/AllListings") ? "border-b border-red-500 text-black" : "border-b-transparent text-gray-500"}`}
+              className={`cursor-pointer py-3 text-sm font-semibold ${getPath("/AllListings") ? "border-b border-red-500 text-black" : "border-b-transparent text-white"}`}
               onClick={() => {
                 closeMenu();
                 navigate("/AllListings");
@@ -99,7 +99,7 @@ export default function Header() {
               Listings
             </li>
             <li
-              className={`cursor-pointer py-3 text-sm font-semibold ${getPath("/offers") ? "border-b border-red-500 text-black" : "border-b-transparent text-gray-500"}`}
+              className={`cursor-pointer py-3 text-sm font-semibold ${getPath("/offers") ? "border-b border-red-500 text-black" : "border-b-transparent text-white"}`}
               onClick={() => {
                 closeMenu();
                 navigate("/offers");
@@ -109,7 +109,7 @@ export default function Header() {
             </li>
             <li
               className={`cursor-pointer py-3 text-sm font-semibold ${
-                (getPath("/Login") || getPath("/profile")) && viewstate !== "Sign in" ? "border-b border-red-500 text-black" : "border-b-transparent text-gray-500"
+                (getPath("/Login") || getPath("/profile")) && viewstate !== "Sign in" ? "border-b border-red-500 text-black" : "border-b-transparent text-white"
               }`}
               onClick={() => {
                 closeMenu();
@@ -119,7 +119,7 @@ export default function Header() {
               {viewstate}
             </li>
             <li
-              className={`cursor-pointer py-3 text-sm font-semibold ${getPath("/Contacts") ? "border-b border-red-500 text-black" : "border-b-transparent text-gray-500"}`}
+              className={`cursor-pointer py-3 text-sm font-semibold ${getPath("/Contacts") ? "border-b border-red-500 text-black" : "border-b-transparent text-white"}`}
               onClick={() => {
                 closeMenu();
                 navigate("/Contacts");
@@ -132,9 +132,9 @@ export default function Header() {
       </header>
 
       {isMobile && isMenuOpen && (
-        <ul className="bg-white border-b border-gray-200 py-3 px-6 space-y-2">
+        <ul className="bg-cyan-700 border-b border-cyan-200 py-3 px-6 space-y-2">
           <li
-            className={`cursor-pointer text-sm font-semibold ${getPath("/") ? "text-red-500 underline font-bold" : "text-gray-500"}`}
+            className={`cursor-pointer text-sm font-semibold ${getPath("/") ? "text-red-500 underline font-bold" : "text-white "}`}
             onClick={() => {
               closeMenu();
               navigate("/");
@@ -143,7 +143,7 @@ export default function Header() {
             Home
           </li>
           <li
-            className={`cursor-pointer text-sm font-semibold ${getPath("/AllListings") ? "text-red-500 underline font-bold" : "text-gray-500"}`}
+            className={`cursor-pointer text-sm font-semibold ${getPath("/AllListings") ? "text-red-500 underline font-bold" : "text-white "}`}
             onClick={() => {
               closeMenu();
               navigate("/AllListings");
@@ -152,7 +152,7 @@ export default function Header() {
             Listings
           </li>
           <li
-            className={`cursor-pointer text-sm font-semibold ${getPath("/offers") ? "text-red-500 underline font-bold" : "text-gray-500"}`}
+            className={`cursor-pointer text-sm font-semibold ${getPath("/offers") ? "text-red-500 underline font-bold" : "text-white"}`}
             onClick={() => {
               closeMenu();
               navigate("/offers");
@@ -162,7 +162,7 @@ export default function Header() {
           </li>
           <li
             className={`cursor-pointer text-sm font-semibold ${
-              (getPath("/Login") || getPath("/profile")) && viewstate !== "Sign in" ? "font-bold text-red-500 underline " : "text-gray-500"
+              (getPath("/Login") || getPath("/profile")) && viewstate !== "Sign in" ? "font-bold text-red-500 underline " : "text-white"
             }`}
             onClick={() => {
               closeMenu();
@@ -172,7 +172,7 @@ export default function Header() {
             {viewstate}
           </li>
           <li
-            className={`cursor-pointer text-sm font-semibold ${getPath("/Contacts") ? "text-red-500 underline font-bold" : "text-gray-500"}`}
+            className={`cursor-pointer text-sm font-semibold ${getPath("/Contacts") ? "text-red-500 underline font-bold" : "text-white"}`}
             onClick={() => {
               closeMenu();
               navigate("/Contacts");
