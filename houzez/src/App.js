@@ -17,7 +17,8 @@ import AllListings from "./pages/AllListings";
 import { ChakraProvider } from "@chakra-ui/react";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-
+import Terms from "./pages/Terms";
+import Privacy from "./pages/Privacy";
 function App() {
   return (
     <>
@@ -27,6 +28,12 @@ function App() {
           <Routes>
             {/* home path  */}
             <Route path="/" element={<Home />}></Route>
+
+            {/* terms of use path */}
+            <Route path="/Terms-of-use" element={<Terms />}></Route>
+
+            {/* privacy policies path  */}
+            <Route path="/privacy-policy" element={<Privacy />}></Route>
 
             {/* All listings path  */}
             <Route path="/AllListings" element={<AllListings />}></Route>

@@ -21,23 +21,23 @@ const Footer = () => {
             </div>
 
             <div>
-              <span className="footer-title">Services</span>
+              <span className="footer-title text-black underline">Services</span>
               <ul className="mt-2 space-y-2">
                 <li>
                   {/* only if authenticated  */}
-                  <a className="link link-hover" href="/sell">
+                  <a className="link link-hover hover:text-red-500" href="/">
                     Sell
                   </a>
                 </li>
 
                 {/* only if authenticated  */}
                 <li>
-                  <a className="link link-hover" href="/rent">
+                  <a className="link link-hover hover:text-red-500" href="/AllListings">
                     Rent
                   </a>
                 </li>
                 <li>
-                  <a className="link link-hover" href="/AllListings">
+                  <a className="link link-hover hover:text-red-500" href="/AllListings">
                     Buy
                   </a>
                 </li>
@@ -45,21 +45,16 @@ const Footer = () => {
             </div>
 
             <div>
-              <span className="footer-title">Legals</span>
+              <span className="footer-title text-black underline">Legals</span>
               <ul className="mt-2 space-y-2">
                 <li>
-                  <a className="link link-hover" href="terms">
+                  <a className="link link-hover hover:text-red-500" href="/Terms-of-use">
                     Terms of use
                   </a>
                 </li>
                 <li>
-                  <a className="link link-hover" href="privacy-policy">
+                  <a className="link link-hover hover:text-red-500" href="/privacy-policy">
                     Privacy policy
-                  </a>
-                </li>
-                <li>
-                  <a className="link link-hover" href="cookie">
-                    Cookie policy
                   </a>
                 </li>
               </ul>
@@ -68,7 +63,7 @@ const Footer = () => {
             {/* office */}
 
             <div className="hidden md:block">
-              <span className="footer-title">Office</span>
+              <span className="footer-title text-black underline">Office</span>
               <ul className="mt-2 space-y-2">
                 <li>JKUAT Towers,</li>
                 <li>Nairobi,</li>
