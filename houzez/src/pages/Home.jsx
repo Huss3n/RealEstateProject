@@ -2,7 +2,7 @@ import { Container, Stack, Flex, Box, Heading, Text, Button, Image, Icon, IconBu
 import { Link } from "react-scroll";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import Slider from "../components/Slider";
-import HeroCard from "../components/card/heroCard";
+import HeroCard from "../components/heroCard";
 import Stats from "../components/Stats";
 import FeaturedProperty from "../components/Featured";
 import Newsletter from "../components/Newsletter";

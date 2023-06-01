@@ -1,68 +1,21 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { MdOutlineLocationOn, MdOutlineAttachMoney } from "react-icons/md";
-// import { TbHomeSearch } from "react-icons/tb";
-// import axios from "axios";
-// import { SERVER_URL } from "../../Config";
-// import { db } from "../firebase";
-// import { collection, getDocs, limit, orderBy, query, startAfter, where } from "firebase/firestore";
-// import Loading from "../components/Loading";
+import { MdOutlineLocationOn } from "react-icons/md";
+import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { db } from "../firebase";
+import { calcLength } from "framer-motion";
 
 const HeroCard = () => {
-  // const [data, setData] = useState({
-  //   location: "",
-  //   propertyType: "House",
-  //   listingType: "Rent",
-  //   minPrice: "",
-  //   maxPrice: "",
-  // });
-  // const searchProperty = async () => {
-  //   try {
-  //     //   const response = await
-  //     //   setSearchData(response.data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // console.log(searchData);
-
-  // console.log(data);
-
-  // async function fetchListings() {
-  //   try {
-  //     const listingRef = collection(db, "listings");
-  //     const q = query(listingRef, where("offer", "==", true), orderBy("timestamp", "desc"), limit(8));
-  //     const querySnap = await getDocs(q);
-  //     const lastVisible = querySnap.docs[querySnap.docs.length - 1];
-  //     setLastFetchListing(lastVisible);
-  //     const listings = [];
-  //     querySnap.forEach((doc) => {
-  //       return listings.push({
-  //         id: doc.id,
-  //         data: doc.data(),
-  //       });
-  //     });
-  //     setListings(listings);
-  //     setLoading(false);
-  //   } catch (error) {
-  //     toast.error("Could not fetch listing");
-  //   }
-  // }
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setData((prevData) => ({ ...prevData, [name]: value }));
-  //   console.log(name);
-  // };
+  const navigate = useNavigate();
 
   const [userInput, setUserInput] = useState({
-    location: "",
-    type: "Rent",
-    rooms: 1,
-    baths: 1,
+    address: "",
+    type: "rent",
+    bedrooms: 1,
+    bathrooms: 1,
   });
-
-  const { location, type, rooms, baths } = userInput;
+  const { address, type, bedrooms, bathrooms } = userInput;
 
   function handleChange(e) {
     setUserInput((prevData) => {
@@ -74,8 +27,32 @@ const HeroCard = () => {
     });
   }
 
-  function searchProperty() {
-    console.log(userInput);
+  async function searchListings() {
+    if (address === "") {
+      toast.warn("Enter property address");
+      return;
+    }
+    const capitilizedLocation = address.charAt(0).toUpperCase() + address.slice(1);
+    const listingsRef = collection(db, "listings");
+    const q = query(
+      listingsRef,
+      where("address", "==", capitilizedLocation),
+      where("type", "==", type),
+      where("bedrooms", "==", bedrooms.toString()),
+      where("bathrooms", "==", bathrooms.toString())
+    );
+    console.log(type);
+    const querySnap = await getDocs(q);
+
+    let listings = [];
+    querySnap.forEach((doc) => {
+      listings.push({
+        id: doc.id,
+        data: doc.data(),
+      });
+    });
+    console.log(listings);
+    return listings;
   }
 
   return (
@@ -93,11 +70,11 @@ const HeroCard = () => {
                   <input
                     type="text"
                     placeholder="Preferred Location"
-                    className="w-full border-none text-gray-500 bg-white rounded-lg p-2  placeholder:text-gray-400 text-lg font-medium py focus:outline-none"
+                    className="w-full border-none text-gray-500 bg-white rounded-lg p-2  placeholder:text-gray-400 text-lg font-medium py focus:outline-none border-black"
                     onChange={handleChange}
                     id="location"
-                    name="location"
-                    value={location}
+                    name="address"
+                    value={address}
                   />
                 </div>
               </div>
@@ -114,8 +91,8 @@ const HeroCard = () => {
                   name="type"
                   value={type}
                 >
-                  <option>Rent</option>
-                  <option>Buy</option>
+                  <option>rent</option>
+                  <option>sale</option>
                 </select>
               </div>
 
@@ -131,8 +108,8 @@ const HeroCard = () => {
                     className="w-full border-none text-gray-500 bg-white rounded-lg p-2  placeholder:text-gray-400 text-lg font-medium py focus:outline-none"
                     onChange={handleChange}
                     id="bedrooms"
-                    name="rooms"
-                    value={rooms}
+                    name="bedrooms"
+                    value={bedrooms}
                   />
                 </div>
               </div>
@@ -149,8 +126,8 @@ const HeroCard = () => {
                     className="w-full border-none text-gray-500 bg-white rounded-lg p-2  placeholder:text-gray-400 text-lg font-medium py focus:outline-none"
                     onChange={handleChange}
                     id="bathrooms"
-                    name="baths"
-                    value={baths}
+                    name="bathrooms"
+                    value={bathrooms}
                   />
                 </div>
               </div>
@@ -158,7 +135,7 @@ const HeroCard = () => {
           </div>
 
           <div className="md:absolute md:right-[5%] flex items-center justify-center -translate-y-1/2">
-            <button className="bg-cyan-600 px-10 py-4 text-white text-xl font-bold rounded-lg hover:bg-cyan-700" onClick={searchProperty}>
+            <button className="bg-cyan-600 px-10 py-4 text-white text-xl font-bold rounded-lg hover:bg-cyan-700" onClick={searchListings}>
               Search
             </button>
           </div>

@@ -19,6 +19,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
+import Search from "./pages/Search";
 function App() {
   return (
     <>
@@ -34,6 +35,9 @@ function App() {
 
             {/* privacy policies path  */}
             <Route path="/privacy-policy" element={<Privacy />}></Route>
+
+            {/* search path  */}
+            <Route path="/search" element={<Search />}></Route>
 
             {/* All listings path  */}
             <Route path="/AllListings" element={<AllListings />}></Route>

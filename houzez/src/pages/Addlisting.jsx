@@ -78,9 +78,9 @@ export default function Addlisting() {
       return; // stop execution
     }
     // check images
-    if (images.length < 10) {
+    if (images.length < 4) {
       setLoading(false);
-      toast.error("Minimun of 10 images allowed");
+      toast.error("Minimum 4 images allowed");
       return;
     }
 

@@ -99,9 +99,9 @@ export default function Profile() {
               value={username}
               disabled={!editDetails}
               onChange={onEdit}
-              className={`w-full px-4 py-2 text-xl text-gray-500 bg-white border-gray-300 rounded transition ease-in-out ${editDetails && "bg-red-200 focus:bg-red-300"}`}
+              className={`w-full px-4 py-2 text-xl text-black bg-white border-gray-300 rounded transition ease-in-out ${editDetails && "bg-red-200 focus:bg-red-300"}`}
             />
-            <input type="text" id="email" value={email} disabled className="w-full px-4 py-2 text-xl text-gray-500 bg-white border-gray-300 rounded transition ease-in-out mt-6" />
+            <input type="text" id="email" value={email} disabled className="w-full px-4 py-2 text-xl text-black bg-white border-gray-300 rounded transition ease-in-out mt-6" />
 
             <div className="flex justify-between whitespace-nowrap text-sm sm:text-lg mt-4 space-x-5 mb-4 w-full p-2">
               <p className="pr-1 text-blue-400 flex items-center">
