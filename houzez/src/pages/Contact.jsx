@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import MiniNav from "../components/MiniNav";
 // TODO send mail to the mail address
 import Footer from "../components/Footer";
-import background from "../components/background/blurry-gradient-haikei.svg";
+// import background from "../components/background/blurry-gradient-haikei.svg";
 
 export default function Contact() {
   useEffect(() => {
@@ -19,8 +19,9 @@ export default function Contact() {
   return (
     <>
       {/* ====== Contact Section Start */}
-      <div className="bg-cover bg-center" style={{ backgroundImage: `url(${background})` }}>
-        <section className="relative z-10 overflow-hidden max-w-[1280px] w-[90%] mx-auto lg:p-6">
+      {/* <div className="bg-cover bg-center" style={{ backgroundImage: `url(${background})` }}> */}
+      <div className="bg-gray-300 bg-full">
+        <section className="relative z-10 overflow-hidden max-w-[1280px] w-[90%] mx-auto lg:p-6 b">
           <div className="pt-4">
             <MiniNav />
           </div>

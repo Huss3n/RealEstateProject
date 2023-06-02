@@ -41,7 +41,6 @@ const HeroCard = () => {
       where("bedrooms", "==", bedrooms.toString()),
       where("bathrooms", "==", bathrooms.toString())
     );
-    console.log(type);
     const querySnap = await getDocs(q);
 
     let listings = [];
@@ -52,7 +51,8 @@ const HeroCard = () => {
       });
     });
     console.log(listings);
-    return listings;
+    // return listings;
+    navigate("/search", { state: { searchResults: listings } });
   }
 
   return (
