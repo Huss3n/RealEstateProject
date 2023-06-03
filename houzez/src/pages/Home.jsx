@@ -52,12 +52,15 @@ export default function CallToActionWithVideo() {
                     id="options-menu"
                     aria-haspopup="true"
                     aria-expanded="true"
+                    href="#featured"
                   >
                     Get started &rarr;
                   </Link>
-                  <Button rounded={"full"} size={"lg"} fontWeight={"normal"} px={6}>
-                    How It Works
-                  </Button>
+                  <Link href="#featured">
+                    <Button rounded={"full"} size={"lg"} fontWeight={"normal"} px={6}>
+                      How It Works
+                    </Button>
+                  </Link>
                 </Stack>
               </Stack>
               <Flex flex={1} justify={"center"} align={"center"} position={"relative"} w={"full"}>
