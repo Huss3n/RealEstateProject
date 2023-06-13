@@ -30,7 +30,19 @@ export default function OAuth() {
       // toast.success((= "login" ? "Sign up successful" : "Login successful"));
       navigate("/");
     } catch (error) {
-      toast.error("Could not authorize Google sign in");
+      var errorCode = error.code;
+      var errorMessage = error.message;
+
+      switch (errorCode) {
+        case "auth/popup-closed-by-user":
+          errorMessage = "Google sign-in was canceled by the user.";
+          break;
+        // Add more cases for other common Google sign-in errors as needed
+        default:
+          errorMessage = "An error occurred during Google sign-in. Please try again later.";
+          break;
+      }
+      toast.error(errorMessage);
     }
   }
 

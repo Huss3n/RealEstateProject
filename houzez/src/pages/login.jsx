@@ -35,8 +35,28 @@ export default function Login() {
         navigate("/");
       }
     } catch (error) {
-      toast.error(`Login failed ${error}`);
-      console.log(error);
+      let errorCode = error.code;
+      let errorMessage = error.message;
+      switch (errorCode) {
+        case "auth/invalid-email":
+          errorMessage = "Invalid email format. Please enter a valid email address.";
+          break;
+        case "auth/user-disabled":
+          errorMessage = "Your account has been disabled. Please contact support for assistance.";
+          break;
+        case "auth/user-not-found":
+          errorMessage = "User not found. Please check your email and password.";
+          break;
+        case "auth/wrong-password":
+          errorMessage = "Invalid password. Please check your password.";
+          break;
+        // Add more cases for other common Firebase errors as needed
+        default:
+          errorMessage = "An error occurred. Please try again later.";
+          break;
+      }
+      toast.error(`${errorMessage}`);
+      // console.log(error);
     }
   }
 
@@ -70,7 +90,7 @@ export default function Login() {
                 <div className="mb-6">
                   <input
                     type="text"
-                    className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none required:border-red-500"
                     id="email"
                     placeholder="Email address"
                     value={email}

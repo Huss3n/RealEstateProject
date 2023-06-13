@@ -36,7 +36,7 @@ export default function Listing() {
     return <Loading />;
   }
   return (
-    <main>
+    <main className="overflow-x-hidden">
       <Swiper slidesPerView={1} navigation pagination={{ type: "progressbar" }} effect="fade" modules={[EffectFade]} autoplay={{ delay: 3000 }}>
         {listing.imgUrls.map((url, index) => (
           <SwiperSlide key={index}>

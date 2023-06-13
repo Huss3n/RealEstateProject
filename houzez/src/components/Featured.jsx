@@ -5,56 +5,6 @@ import { Link } from "react-router-dom";
 import "../index.css";
 
 export default function FeaturedProperty() {
-  //   const [user, setUser] = useState({
-  //     user_id: "",
-  //   });
-
-  //   useEffect(() => {
-  //     loadUser();
-  //   }, []);
-
-  //   const loadUser = async () => {
-  //     const result = await axios.get(`${SERVER_URL}/api/dashboard`, {
-  //       headers: { token: localStorage.token },
-  //     });
-  //     setUser(result.data);
-  //   };
-
-  //   const [rentProperties, setRentProperties] = useState([]);
-
-  //   const [buyProperties, setBuyProperties] = useState([]);
-
-  //   const getRentProperties = async () => {
-  //     try {
-  //       // send user parameter to backend to exclude properties posted by current logged in user if any user is logged in
-  //       let user_id = user.user_id;
-  //       const res = await axios.get(`${SERVER_URL}/api/properties/home?user_id=${user_id}&listingtype=Rent`);
-  //       setRentProperties(res.data.property);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-
-  //   const getBuyProperties = async () => {
-  //     try {
-  //       // send user parameter to backend to exclude properties posted by current logged in user if any user is logged in
-  //       let user_id = user.user_id;
-  //       const res = await axios.get(`${SERVER_URL}/api/properties/home?user_id=${user_id}&listingtype=Buy`);
-  //       setBuyProperties(res.data.property);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-
-  //   const shouldFetch = useRef(true); // to prevent infinite loop
-  //   useEffect(() => {
-  //     if (!shouldFetch.current) {
-  //       shouldFetch.current = false; // set it to true first time component renders
-  //     }
-  //     getRentProperties();
-  //     getBuyProperties();
-  //   }, [user]);
-
   return (
     <>
       <div className="max-w-[1440px] mx-auto lg:p-20 pb-2 pt-2 px-2">
