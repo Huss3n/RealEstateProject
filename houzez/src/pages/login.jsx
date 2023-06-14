@@ -16,6 +16,10 @@ export default function Login() {
   });
   const { email, password } = formData;
 
+  // password and email errors
+  const [emailError, setEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+
   function onchange(event) {
     setFormData((prevState) => ({
       // keep the preview state and just add a new one
@@ -26,6 +30,21 @@ export default function Login() {
 
   async function login(e) {
     e.preventDefault();
+
+    // email and password validation errors
+    if (email.trim() === "" && password.trim() === "") {
+      setEmailError(true);
+      setPasswordError(true);
+      toast.error("Email and password required");
+      return;
+    } else if (email.trim() === "") {
+      setEmailError(true);
+      toast.error("Email required");
+      return;
+    } else if (password.trim() === "") {
+      setPasswordError(true);
+      toast.error("Password required");
+    }
     try {
       const auth = getAuth();
       // sign in user
@@ -90,7 +109,9 @@ export default function Login() {
                 <div className="mb-6">
                   <input
                     type="text"
-                    className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none required:border-red-500"
+                    className={`form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border ${
+                      emailError ? "border-solid border-red-500" : "border-gray-300"
+                    } rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none`}
                     id="email"
                     placeholder="Email address"
                     value={email}
@@ -102,7 +123,9 @@ export default function Login() {
                 <div className="mb-6 mt-4 relative">
                   <input
                     type={viewPassword ? "text" : "password"}
-                    className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    className={`form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border ${
+                      passwordError ? "border-solid border-red-500" : "border-gray-300"
+                    } rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none`}
                     id="password"
                     placeholder="Password"
                     value={password}

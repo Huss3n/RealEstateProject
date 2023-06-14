@@ -52,7 +52,7 @@ export default function FeaturedProperty() {
                 <p className="text-center lg:text-left text-gray-400">
                   No matter what path you take to sell your home, we can help you navigate a successful sale and with the best practice and safety in mind
                 </p>
-                <a href="#" className="btn btn-sell bg-blue-600">
+                <a href="profile" className="btn btn-sell bg-blue-600">
                   Sell a Home
                 </a>
               </div>
