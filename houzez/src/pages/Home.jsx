@@ -9,6 +9,10 @@ import Newsletter from "../components/Newsletter";
 import Footer from "../components/Footer";
 
 export default function CallToActionWithVideo() {
+  const handleClick = () => {
+    const element = document.getElementById("featured");
+    element.scrollIntoView({ behavior: "smooth" });
+  };
   return (
     <>
       <div className="overflow-hidden">
@@ -57,7 +61,7 @@ export default function CallToActionWithVideo() {
                     Get started &rarr;
                   </Link>
                   <Link href="#featured">
-                    <Button rounded={"full"} size={"lg"} fontWeight={"normal"} px={6}>
+                    <Button rounded={"full"} size={"lg"} fontWeight={"normal"} px={6} onClick={handleClick}>
                       How It Works
                     </Button>
                   </Link>

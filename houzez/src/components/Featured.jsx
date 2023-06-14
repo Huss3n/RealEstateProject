@@ -7,8 +7,8 @@ import "../index.css";
 export default function FeaturedProperty() {
   return (
     <>
-      <div className="max-w-[1440px] mx-auto lg:p-20 pb-2 pt-2 px-2">
-        <div className="lg:p-20 lg:rounded-3xl bg-white shadow-xl py-16" id="featured">
+      <div className="max-w-[1440px] mx-auto lg:p-20 pb-2 pt-2 px-2" id="featured">
+        <div className="lg:p-20 lg:rounded-3xl bg-white shadow-xl py-16">
           <h2 className="mb-3 font-semibold lg:text-[48px] text-3xl text-center lg:text-left">Featured Property</h2>
           <p className="text-center lg:text-left text-gray-400 sm:mb-12 mb-10">Let's find you a comfortable place</p>
 

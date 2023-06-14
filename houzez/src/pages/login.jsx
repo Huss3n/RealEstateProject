@@ -35,15 +35,21 @@ export default function Login() {
     if (email.trim() === "" && password.trim() === "") {
       setEmailError(true);
       setPasswordError(true);
-      toast.error("Email and password required");
+      toast.error("Email and password required", {
+        autoClose: 2000,
+      });
       return;
     } else if (email.trim() === "") {
       setEmailError(true);
-      toast.error("Email required");
+      toast.error("Email required", {
+        autoClose: 2000,
+      });
       return;
     } else if (password.trim() === "") {
       setPasswordError(true);
-      toast.error("Password required");
+      toast.error("Password required", {
+        autoClose: 2000,
+      });
     }
     try {
       const auth = getAuth();
