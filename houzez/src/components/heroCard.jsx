@@ -52,7 +52,7 @@ const HeroCard = () => {
     });
     console.log(listings);
     // return listings;
-    navigate("/search", { state: { searchResults: listings } });
+    navigate("/search", { state: { listings } });
   }
 
   return (
