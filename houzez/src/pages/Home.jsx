@@ -1,6 +1,5 @@
 import { Container, Stack, Flex, Box, Heading, Text, Button, Image, Icon, IconButton, useColorModeValue } from "@chakra-ui/react";
 import { Link } from "react-scroll";
-import { AiOutlineArrowRight } from "react-icons/ai";
 import Slider from "../components/Slider";
 import HeroCard from "../components/heroCard";
 import Stats from "../components/Stats";
