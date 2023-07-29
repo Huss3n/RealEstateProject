@@ -1,43 +1,23 @@
-// import { useLocation } from "react-router-dom";
-// import PropertySearch from "./PropertySearch";
+import React, { useState } from "react";
+// import DataFetcher from "./DataFetcher";
 
-// function SearchDisplay() {
-//   const location = useLocation();
-//   const searchResults = location.state;
+const SearchComponent = (props) => {
+  let data = props.listings;
+  const [searchResults, setSearchResults] = useState([]);
 
-//   if (!searchResults) {
-//     // Handle the case when no search results are available
-//     console.log(PropertySearch.listing);
-//     return <div>No search results found.</div>;
-//   }
+  const handleDataFetched = (data) => {
+    setSearchResults(data);
+  };
 
-//   // Render the search results
-//   return (
-//     <div>
-//       <h1>Search Results</h1>
-//       {searchResults.map((listing) => (
-//         <PropertySearch key={listing.id} listing={listing.data} />
-//       ))}
-//     </div>
-//   );
-// }
-import React, { useEffect } from "react";
-import { useLocation } from "react-router-dom";
-
-function SearchComponent() {
-  const location = useLocation();
-  const searchResults = location.state && location.state.searchResults;
-
-  useEffect(() => {
-    console.log(searchResults);
-  }, [searchResults]);
+  // Your search component logic, including the search function that triggers the fetching
 
   return (
     <div>
-      <h1>Search Page</h1>
-      {/* Render the search results */}
+      {/* Your search component UI and logic here */}
+      {/* <DataFetcher onDataFetched={handleDataFetched} /> */}
+      {/* Use 'searchResults' in this component to display the fetched data */}
     </div>
   );
-}
+};
 
 export default SearchComponent;

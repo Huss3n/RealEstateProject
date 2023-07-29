@@ -6,8 +6,9 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../firebase";
 import { calcLength } from "framer-motion";
 
-const HeroCard = () => {
+const HeroCard = (props) => {
   const navigate = useNavigate();
+  const [listings, setListings] = useState([]);
 
   const [userInput, setUserInput] = useState({
     address: "",
@@ -43,12 +44,14 @@ const HeroCard = () => {
     );
     const querySnap = await getDocs(q);
 
-    let listings = [];
+    //  listings = [];
     querySnap.forEach((doc) => {
-      listings.push({
-        id: doc.id,
-        data: doc.data(),
-      });
+      setListings(
+        listings.push({
+          id: doc.id,
+          data: doc.data(),
+        })
+      );
     });
     console.log(listings);
     // return listings;
