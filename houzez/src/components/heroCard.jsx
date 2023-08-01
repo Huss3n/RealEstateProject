@@ -6,10 +6,11 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../firebase";
 import { calcLength } from "framer-motion";
 
-const HeroCard = (props) => {
+const HeroCard = ({ listing, updateListings }) => {
   const navigate = useNavigate();
-  const [listings, setListings] = useState([]);
+  // const [listings, setListings] = useState([]);
 
+  // keeping track of the user search inputs
   const [userInput, setUserInput] = useState({
     address: "",
     type: "rent",
@@ -28,11 +29,16 @@ const HeroCard = (props) => {
     });
   }
 
+  // search function
+
   async function searchListings() {
+    // checking for address input
     if (address === "") {
       toast.warn("Enter property address");
       return;
     }
+
+    // cleaning the user input
     const capitilizedLocation = address.charAt(0).toUpperCase() + address.slice(1);
     const listingsRef = collection(db, "listings");
     const q = query(
@@ -44,18 +50,23 @@ const HeroCard = (props) => {
     );
     const querySnap = await getDocs(q);
 
-    //  listings = [];
+    const newListings = [];
     querySnap.forEach((doc) => {
-      setListings(
-        listings.push({
-          id: doc.id,
-          data: doc.data(),
-        })
-      );
+      const newListing = {
+        id: doc.id,
+        data: doc.data(),
+      };
+      newListings.push(newListing);
     });
-    console.log(listings);
+    // setListings(newListings);
+    updateListings(newListings);
+    console.log(listing);
     // return listings;
-    navigate("/search", { state: { listings } });
+    navigate("/search");
+    // navigate("/search", { state: { listing } });
+
+    // check for the presence of the desired inputs
+    // navigate("/search", { search: `?listings=${encodeURIComponent(JSON.stringify(newListings))}` });
   }
 
   return (

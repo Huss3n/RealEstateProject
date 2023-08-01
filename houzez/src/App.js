@@ -20,7 +20,15 @@ import Contact from "./pages/Contact";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import Search from "./pages/Search";
+import { useState } from "react";
 function App() {
+  const [listings, setListings] = useState([]);
+
+  // Define a callback function to update the 'listings' prop
+  const updateListings = (newListings) => {
+    setListings(newListings);
+  };
+
   return (
     <>
       <ChakraProvider>
@@ -28,7 +36,7 @@ function App() {
           <Header />
           <Routes>
             {/* home path  */}
-            <Route path="/" element={<Home />}></Route>
+            <Route path="/" element={<Home listing={listings} setListings={setListings} updateListings={updateListings} />}></Route>
 
             {/* terms of use path */}
             <Route path="/Terms-of-use" element={<Terms />}></Route>
@@ -37,7 +45,7 @@ function App() {
             <Route path="/privacy-policy" element={<Privacy />}></Route>
 
             {/* search path  */}
-            <Route path="/search" element={<Search />}></Route>
+            <Route path="/search" element={<Search listing={listings} />}></Route>
 
             {/* All listings path  */}
             <Route path="/AllListings" element={<AllListings />}></Route>

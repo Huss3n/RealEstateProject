@@ -7,7 +7,7 @@ import FeaturedProperty from "../components/Featured";
 import Newsletter from "../components/Newsletter";
 import Footer from "../components/Footer";
 
-export default function CallToActionWithVideo() {
+export default function CallToActionWithVideo({ listing, updateListings, setListings }) {
   const handleClick = () => {
     const element = document.getElementById("featured");
     element.scrollIntoView({ behavior: "smooth" });
@@ -93,7 +93,7 @@ export default function CallToActionWithVideo() {
                 </Box>
               </Flex>
             </Stack>
-            <HeroCard />
+            <HeroCard listing={listing} setListings={setListings} updateListings={updateListings} />
           </Container>
         </div>
         <div className="px-2 overflow-x-none rounded">
