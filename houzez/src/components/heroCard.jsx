@@ -30,7 +30,6 @@ const HeroCard = ({ listing, updateListings }) => {
   }
 
   // search function
-
   async function searchListings() {
     // checking for address input
     if (address === "") {
@@ -62,11 +61,11 @@ const HeroCard = ({ listing, updateListings }) => {
     updateListings(newListings);
     console.log(listing);
     // return listings;
-    navigate("/search");
+    // navigate("/search");
     // navigate("/search", { state: { listing } });
 
     // check for the presence of the desired inputs
-    // navigate("/search", { search: `?listings=${encodeURIComponent(JSON.stringify(newListings))}` });
+    navigate("/search", { search: `?listings=${encodeURIComponent(JSON.stringify(newListings))}` });
   }
 
   return (

@@ -32,7 +32,8 @@ export default function ListingItem({ listing, id, onEdit, onDelete }) {
 
           {/* property value either rent or sale  */}
           <p className="text-[#457b9d] mt-2 font-semibold">
-            Kshs{listing.offer ? listing.discountedPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : listing.regularPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+            Kshs
+            {listing.offer ? listing.discountedPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : listing.regularPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
             {listing.type === "rent" && " / month"}
           </p>
 
