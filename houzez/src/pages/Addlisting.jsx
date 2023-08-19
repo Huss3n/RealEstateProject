@@ -14,6 +14,9 @@ export default function Addlisting() {
   // geolocation hook
   const [geolacationEnabled, setGeolocationEnabled] = useState(true);
 
+  // separate state to handle the images
+  const [selectedImages, setSelectedImages] = useState({});
+
   // navigate hook
   const navigate = useNavigate();
 
@@ -31,7 +34,7 @@ export default function Addlisting() {
     offer: false,
     regularPrice: 1,
     discountedPrice: 1,
-    images: {},
+    // images: {},
   });
 
   // destructuring the form data
@@ -64,6 +67,11 @@ export default function Addlisting() {
     }
   }
 
+  // Separate onChange function for images
+  const onImageChange = (e) => {
+    setSelectedImages([...e.target.files]);
+  };
+
   // on submit function
   async function onSubmit(e) {
     // prevent reloading of the form
@@ -78,7 +86,14 @@ export default function Addlisting() {
       return; // stop execution
     }
     // check images
-    if (images.length < 4) {
+    // if (images.length < 4) {
+    //   setLoading(false);
+    //   toast.error("Minimum 4 images allowed");
+    //   return;
+    // }
+
+    // new check images function
+    if (selectedImages.length < 4) {
       setLoading(false);
       toast.error("Minimum 4 images allowed");
       return;
@@ -440,12 +455,21 @@ export default function Addlisting() {
           <input
             type="file"
             id="images"
-            onChange={onChange}
-            required
+            onChange={onImageChange}
+            required={selectedImages.length === 0}
             accept=".jpg, .png, .jpeg, .heif, .heic"
             multiple
             className="w-full px-3 py-2 text-gray-700 bg-white border border-gray-300 rounded-xl transition duration-150 ease-in-out focus:bg-white focus:border-slate-500"
           />
+          {selectedImages.length > 0 && (
+            <div>
+              Selected Images:
+              {selectedImages.map((image, index) => (
+                <div key={index}>{image.name}</div>
+              ))}
+            </div>
+          )}
+          {selectedImages.length < 4 && <div style={{ color: "red" }}>Minimum 4 images required</div>}
         </div>
         <button
           type="submit"
