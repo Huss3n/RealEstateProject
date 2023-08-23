@@ -38,6 +38,9 @@ function App() {
             {/* home path  */}
             <Route path="/" element={<Home listing={listings} setListings={setListings} updateListings={updateListings} />}></Route>
 
+            {/* about path  */}
+            <Route path="/search" element={<Search />}></Route>
+
             {/* terms of use path */}
             <Route path="/Terms-of-use" element={<Terms />}></Route>
 

@@ -11,8 +11,8 @@ export default function Contact() {
   }, []);
 
   const contactMethods = {
-    contact: "testmail@gmail.com",
-    phone: "+1 (555) 000-000",
+    contact: "info@househive.com",
+    phone: "+254 (7) 000-000",
     location: "JKUAT Towers, Nairobi",
   };
 
@@ -20,7 +20,7 @@ export default function Contact() {
     <>
       {/* ====== Contact Section Start */}
       {/* <div className="bg-cover bg-center" style={{ backgroundImage: `url(${background})` }}> */}
-      <div className="bg-gray-300 bg-full">
+      <div className="bg-cyan-700 bg-full">
         <section className="relative z-10 overflow-hidden max-w-[1280px] w-[90%] mx-auto lg:p-6 b">
           <div className="pt-4">
             <MiniNav />

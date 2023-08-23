@@ -92,7 +92,7 @@ export default function Addlisting() {
     //   return;
     // }
 
-    // new check images function
+    // new check for images function
     if (selectedImages.length < 4) {
       setLoading(false);
       toast.error("Minimum 4 images allowed");
@@ -180,7 +180,7 @@ export default function Addlisting() {
         );
       });
     }
-    const imgUrls = await Promise.all([...images].map((image) => storeImage(image))).catch((error) => {
+    const imgUrls = await Promise.all([...selectedImages].map((image) => storeImage(image))).catch((error) => {
       setLoading(false);
       toast.error("Images not uploaded");
       return;

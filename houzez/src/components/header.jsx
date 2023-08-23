@@ -90,6 +90,15 @@ export default function Header() {
               Home
             </li>
             <li
+              className={`cursor-pointer py-3 text-sm font-semibold ${getPath("/Search") ? "border-b border-red-500 text-black" : "border-b-transparent text-white"}`}
+              onClick={() => {
+                closeMenu();
+                navigate("/Search");
+              }}
+            >
+              Search
+            </li>
+            <li
               className={`cursor-pointer py-3 text-sm font-semibold ${getPath("/AllListings") ? "border-b border-red-500 text-black" : "border-b-transparent text-white"}`}
               onClick={() => {
                 closeMenu();
