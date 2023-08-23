@@ -3,11 +3,10 @@ import Footer from "./Footer";
 
 export default function SearchDisplay({ listing, id }) {
   return (
-    <div className="flex flex-col min-h-screen">
-      <div className="flex-1">
+    <div className="max-w-8xl mt-6 ">
+      <div className="">
         <HeroCard />
       </div>
-      <Footer />
     </div>
   );
 }

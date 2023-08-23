@@ -5,6 +5,9 @@ import { toast } from "react-toastify";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../firebase";
 import SearchResultItem from "./SearchResults";
+import AllListings from "../pages/AllListings";
+import Footer from "./Footer";
+
 import { Link } from "react-router-dom";
 import ListingItem from "./ListingItem";
 import { calcLength } from "framer-motion";
@@ -70,53 +73,10 @@ const HeroCard = ({ listing, updateListings }) => {
 
       // setListings(newListings);
       updateListings(newListings);
-
-      // check for the presence of the desired inputs
-      // navigate("/search", { search: `?listings=${encodeURIComponent(JSON.stringify(newListings))}` });
     });
 
     console.log(listing);
-    // return listings;
-    // navigate("/search");
-    // navigate("/search", { state: { listing } });
   }
-
-  // async function searchListings() {
-  //   // checking for address input
-  //   if (address === "") {
-  //     toast.warn("Enter property address");
-  //     return;
-  //   }
-
-  //   // cleaning the user input
-  //   const capitilizedLocation = address.charAt(0).toUpperCase() + address.slice(1);
-  //   const listingsRef = collection(db, "listings");
-  //   const q = query(
-  //     listingsRef,
-  //     where("address", "==", capitilizedLocation),
-  //     where("type", "==", type),
-  //     where("bedrooms", "==", bedrooms.toString()),
-  //     where("bathrooms", "==", bathrooms.toString())
-  //   );
-  //   const querySnap = await getDocs(q);
-
-  //   const newListings = [];
-  //   querySnap.forEach((doc) => {
-  //     const newListing = {
-  //       id: doc.id,
-  //       data: doc.data(),
-  //     };
-  //     newListings.push(newListing);
-  //   });
-
-  //   // Update the listings state using the updateListings function
-  //   updateListings(newListings);
-
-  //   // Navigate after updating the listings (outside the forEach loop)
-  //   // navigate("/search", {
-  //   //   search: `?listings=${encodeURIComponent(JSON.stringify(newListings))}`,
-  //   // });
-  // }
 
   return (
     <div className="">
@@ -201,27 +161,24 @@ const HeroCard = ({ listing, updateListings }) => {
             <button className="bg-cyan-600 px-10 py-4 text-white text-xl font-bold rounded-lg hover:bg-cyan-700" onClick={searchListings}>
               Search
             </button>
-            {/* Display search results */}
-            {searchResults.length > 0 && (
-              <div className="mt-96 p-6 border border-gray-300 rounded-lg max-w-screen-md overflow-hidden">
-                <h2 className="text-xl font-bold mb-2">Search Results:</h2>
-                <pre className="overflow-x-auto max-h-60">{JSON.stringify(searchResults, null, 2)}</pre>
-              </div>
-            )}
-            {/* Display results  */}
-            {searchResults.length > 0 && (
-              <div className="mt-4">
-                <h2 className="text-2xl font-bold">Search Results:</h2>
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                  {searchResults.map((result) => (
-                    <SearchResultItem key={result.id} listing={result.data} />
-                  ))}
-                </div>
-              </div>
-            )}
+
+            {/* Display results in component  */}
           </div>
         </div>
       </div>
+      {searchResults.length > 0 ? (
+        <div className="px-4 mt-2">
+          <h2 className="text-2xl text-center font-semibold mb-6">Search Results:</h2>
+          <ul className="sm:grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+            {searchResults.map((result) => (
+              <SearchResultItem key={result.id} id={result.id} listing={result.data} />
+            ))}
+          </ul>
+          <Footer />
+        </div>
+      ) : (
+        <AllListings />
+      )}
     </div>
   );
 };
